@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+Route::resource('/roles', 'RolesController');
+Route::resource('/medicinas', 'MedicinasController');
+Route::get('/roles/{id}/permisos', 'RolesController@permisos');
+Route::put('/roles/{id}/asignarpermisos','RolesController@asignarPermisos');
+Route::resource('/permisos', 'PermissionsController');
