@@ -29,6 +29,9 @@ class Recipe extends Model
 
         return $this->belongsTo('App\Historia','recipe_id');
     }
+    public function ScopeStatus($query){
 
 
+        return $query->where('status','=','Pendiente');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Especialidad;
+
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Validator;
@@ -216,8 +217,18 @@ class UsersController extends Controller
 
 
     public function medicosindex(){
+
+
         $medicos = User::role('Medico')->paginate();
         return view('users.medicos',['medicos'=>$medicos]);
+
+    }
+    public function mostrarcitas($id)
+    {
+        $medico = User::findorFail($id);
+        $usuario= Cita::where('medico_id', $id)->get();
+
+        return view('citas.medicocitas',['usuario'=>$usuario, 'medico'=>$medico]);
 
     }
 }

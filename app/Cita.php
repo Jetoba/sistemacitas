@@ -19,14 +19,21 @@ class Cita extends Model
     public function ScopeStatus($query){
 
 
-        return $query->where('status','=','pendiente');
+        return $query->where('status','=','Asignada');
 
 
     }
     public function ScopeId($query, $id){
 
 
-        return $query->where('doctor','like','%$id%');
+        return $query->where('usuario_id','like','%$id%');
+
+
+    }
+    public function Scopemedico($query, $id){
+
+
+        return $query->where('medico_id','like','%$id%');
 
 
     }

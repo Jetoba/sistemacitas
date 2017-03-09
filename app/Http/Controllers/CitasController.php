@@ -70,7 +70,7 @@ class CitasController extends Controller
             \DB::commit();
         }
 
-        return redirect('/cita')->with('mensaje', 'Cita creado con exito');
+        return redirect('/home')->with('mensaje', 'Cita creado con exito');
 
     }
 
@@ -94,7 +94,8 @@ class CitasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cita = Cita::findOrFail($id);
+        return view('cite.edit', ['cita'=>$cita]);
     }
 
     /**
@@ -118,5 +119,28 @@ class CitasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function medicosindex(){
+        $medicos = User::role('Medico')->paginate(5);
+        return view('users.medicos',['medicos'=>$medicos]);
+
+    }
+
+    public function mostrarcitas($id)
+    {
+        $medico = User::findorFail($id);
+        $usuarios= Cita::where('medico', $id)->get();
+
+        return view('citas.citasmedico',['usuarios'=>$usuarios, 'medico'=>$medico]);
+
+    }
+    public function miscitas(){
+
+        $id = Auth::user()->id;
+        $citas= Cita::where('medico', $id)->where('status','=','Asignada')->get();
+
+        return view('doctores.home',['citas'=>$citas]);
+
     }
 }

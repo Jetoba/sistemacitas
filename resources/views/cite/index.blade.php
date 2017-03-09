@@ -10,115 +10,45 @@
                         <strong>Aviso:</strong> {{session ('mensaje')}}.
                     </div>
                 </div>
-
             </div>
         @endif
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading" >Listado de Citas</div>
-
                     <div class="panel-body">
-
-                        @if(Auth::user()->roles[0]->hasPermissionTo('CitasSecretaria') or Auth::user()->can('CitasSecretaria'))
-
-                        @endif
-
-                        <a href="{{url('cita/create')}}" class="btn btn-success">
-                            <i class="fa fa-user"></i> Nueva Cita</a>
-
+                        <a href="{{url('/medicos')}}" class="btn btn-success">
+                            <i class="fa fa-user"></i> Medico y sus citas</a>
                         <table class="table table-bordered" style="margin-top: 1%;">
                             <tr>
                                 <th>Fecha</th>
                                 <th>Hora</th>
                                 <th>Medico</th>
                                 <th>Especilidad</th>
-                                @if(Auth::user()->roles[0]->hasPermissionTo('CitasSecretaria') or Auth::user()->can('CitasSecretaria'))
-                                    <th>Paciente</th>
-                                @endif
+                                <th>Paciente</th>
                                 <th>Estado</th>
-
-
-
-                                @if(Auth::user()->roles[0]->hasPermissionTo('CitasSecretaria') or Auth::user()->can('CitasSecretaria'))
-                                    <th colspan="3" width="10%">Acciones</th>
-                                @endif
+                                <th colspan="3" width="10%">Acciones</th>
                             </tr>
                             @foreach($cita as $cita)
                                 <tr>
                                     <td>{{$cita->fecha}}</td>
-                                    <td>{{$cita->user->nombre." ".$cita->user->apellido}}</td>
-                                    <td>{{$cita->especial->descripcion}}</td>
-                                    <td>{{$cita->doctor->nombre." ".$cita->doctor->apellido}}</td>
-
-
-
-
-                                    <td><a href="{{url('/citas/'.$cita->id.'/edit')}}" class="btn btn-primary">
+                                    <td>{{$cita->hora}}</td>
+                                    <td>{{$cita->medico_id->nombre." ".$cita->medico_id->apellido}}</td>
+                                    <td>{{$cita->especialidad_id->nombre}}</td>
+                                    <td>{{$cita->usuario_id->nombre}}</td>
+                                    <td>{{$cita->status}}</td>
+                                    <td>
+                                        <a href="{{url('/citas/'.$cita->id.'/edit')}}" class="btn btn-primary">
                                             <i class="fa fa-edit"></i>
                                         </a>
-
                                     </td>
-                                    <td>
-                                        <button class="btn btn-danger"
-                                                data-action="{{ url('/citas/'.$cita->id) }}"
-                                                data-name="{{ $cita->name."".$cita->apellido."C.I.:".$cita->cedula}}"
-                                                data-toggle="modal" data-target="#confirm-delete">
-                                            <i class ="fa fa-trash fa 1x"></i>
-                                        </button>
-                                    </td>
-
-
                                 </tr>
-
-
                             @endforeach
                             {{-- <th colspan="4" class="text-center">{{$citas->links()}}</th>--}}
                         </table>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="confirm-delete" tabindex="-1"
-         role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                </div>
-                <div class="modal-body">
-                    <p>¿Seguro que desea eliminar este
-                        registro?</p>
-                    <p class="nombre"></p>
-                </div>
-                <div class="modal-footer">
-                    <form class="form-inline form-delete"
-                          role="form"
-                          method="POST"
-                          action="">
-                        {!! method_field('DELETE') !!}
-                        {!! csrf_field() !!}
-
-                        <button type="button"
-                                class="btn btn-default"
-                                data-dismiss="modal">Cancelar
-                        </button>
-
-
-                        <button id="delete-btn"
-                                class="btn btn-danger"
-                                title="Eliminar">Eliminar
-                        </button>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 @endsection

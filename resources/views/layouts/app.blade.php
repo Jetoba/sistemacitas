@@ -60,6 +60,7 @@
                             <li><a href="{{ url('/especialidades') }}">Especialidades</a></li>
                             <li><a href="{{ url('/medicos') }}">Medicos</a></li>
                             <li><a href="{{ url('/cita') }}">Citas</a></li>
+                            <li><a href="{{ url('/home') }}">Inicio</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->nombre." ".Auth::user()->apellido }} <span class="caret"></span>
@@ -67,6 +68,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

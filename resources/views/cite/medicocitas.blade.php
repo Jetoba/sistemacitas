@@ -1,67 +1,56 @@
-
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
         @if(session('mensaje'))
             <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-info alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Info:</strong> {{ session('mensaje') }}.
+                <div class="col md-12">
+                    <div class="alert alert-info alert-dismissible" role="info">
+                        <button type="button" class="close" data-dismiss="info" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Aviso:</strong> {{session ('mensaje')}}.
                     </div>
                 </div>
+
             </div>
         @endif
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-
-                    <div class="panel-heading">Medicos</div>
-
+                    <div class="panel-heading">Las citas del Dr {{$medico->nombre." ".$medico->apellido}}</div>
                     <div class="panel-body">
-                        Listado de Medicos
-
-
-                            <a href="{{ url('/users/create') }}" class="btn btn-success">
-                                <i class="fa fa-user"></i> Nuevo Usuario
-                            </a>
-
-
                         <table class="table table-bordered">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Cedula</th>
-                                <th>Especialidad</th>
-                                <th width="5%" colspan="1"></th>
+                                <th colspan="3" width="10%">Acciones</th>
                             </tr>
-                            @foreach($medicos as $medico)
+                            <?php ?>
+                            @foreach($usuarios as $usuario)
                                 <tr>
-                                    <td>{{ $medico->nombre }}</td>
-                                    <td>{{ $medico->apellido }}</td>
-                                    <td>{{ $medico->cedula }}</td>
-                                    <td>{{ $medico->especialidad_id}}</td>
-                                    <td><a href="" class="btn btn-primary">
-                                           Citas
+                                    <td>{{$usuario->fecha}}</td>
+                                    <td>{{$usuario->user->nombre." ".$usuario->user->apellido}}</td>
+                                    <td><a href="{{url('/citas/'.$usuario->id.'/edit')}}" class="btn btn-primary">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
+                                </tr>
                             @endforeach
-                            <tr>
-                            </tr>
+                            {{-- <th colspan="4" class="text-center">{{$usuarios->links()}}</th>--}}
                         </table>
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="confirm-delete" tabindex="-1"
          role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-
                 </div>
                 <div class="modal-body">
                     <p>¿Seguro que desea eliminar este
@@ -75,19 +64,23 @@
                           action="">
                         {!! method_field('DELETE') !!}
                         {!! csrf_field() !!}
+
                         <button type="button"
                                 class="btn btn-default"
                                 data-dismiss="modal">Cancelar
                         </button>
 
+                        {{-- @if(Auth::user()->roles[0]->hasPermissionTo('EliminarUsuario') or Auth::user()->can('EliminarUsuario'))--}}
                         <button id="delete-btn"
                                 class="btn btn-danger"
                                 title="Eliminar">Eliminar
                         </button>
-
+                        {{-- @endif--}}
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+
 @endsection
