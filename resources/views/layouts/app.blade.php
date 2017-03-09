@@ -16,7 +16,7 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel =<?php echo json_encode([
+        window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
@@ -57,6 +57,9 @@
                             <li><a href="{{ url('/roles') }}">Roles</a></li>
                             <li><a href="{{ url('/permisos') }}">Permisos</a></li>
                             <li><a href="{{ url('/medicinas') }}">Medicinas</a></li>
+                            <li><a href="{{ url('/especialidades') }}">Especialidades</a></li>
+                            <li><a href="{{ url('/medicos') }}">Medicos</a></li>
+                            <li><a href="{{ url('/cita') }}">Citas</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->nombre." ".Auth::user()->apellido }} <span class="caret"></span>

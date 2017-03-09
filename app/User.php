@@ -9,7 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'apellido', 'cedula', 'fechanacimiento', 'edad', 'sexo', 'telefono', 'celular', 'direccion', 'email', 'password',
+        'nombre', 'apellido', 'cedula', 'fechanacimiento', 'edad', 'sexo',
+        'telefono', 'celular', 'direccion', 'email', 'password', 'especialidad_id',
     ];
 
     /**
@@ -28,4 +29,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function especialidad(){
+        return $this->belongsTo('App\Especialidad');
+    }
+
+    public function citas(){
+        return $this->belongsTo('App\Cita');
+    }
+
+    public function citasmedico(){
+
+        return $this->belongsTo('App\Cita','medico_id');
+    }
+
+    public function historia(){
+
+        return $this->hasOne('App\Historia');
+    }
+
 }

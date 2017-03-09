@@ -18,8 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::resource('/cita', 'CitasController');
 Route::resource('/roles', 'RolesController');
+Route::resource('/users', 'UsersController');
 Route::resource('/medicinas', 'MedicinasController');
+Route::resource('/especialidades', 'EspecialidadesController');
+Route::resource('/medicos', 'UsersController@medicosindex');
 Route::get('/roles/{id}/permisos', 'RolesController@permisos');
 Route::put('/roles/{id}/asignarpermisos','RolesController@asignarPermisos');
 Route::resource('/permisos', 'PermissionsController');
