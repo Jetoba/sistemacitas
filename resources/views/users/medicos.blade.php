@@ -34,7 +34,7 @@
                                 <th>Apellido</th>
                                 <th>Cedula</th>
                                 <th>Especialidad</th>
-                                <th width="5%" colspan="1"></th>
+                                <th width="5%" colspan="3">Acciones</th>
                             </tr>
                             @foreach($medicos as $medico)
                                 <tr>
@@ -42,10 +42,24 @@
                                     <td>{{ $medico->apellido }}</td>
                                     <td>{{ $medico->cedula }}</td>
                                     <td>{{ $medico->especialidad[0]->nombre}}</td>
-                                    <td><a href="" class="btn btn-primary">
-                                           Citas
+
+                                    <td>
+                                        <a href="{{url('/cita/'.$medico->id.'/citamedico')}}" class="btn btn-primary">
+                                            Citas
+                                        </a>
+
+                                    </td>
+
+
+                                    <td>
+                                        <a href="{{ url('medico/'.$medico->id.'/asignar') }}" class="btn btn-warning">
+
+                                            <i class="fa fa-id-card"></i>
                                         </a>
                                     </td>
+
+
+                                </tr>
                             @endforeach
                             <tr>
                             </tr>

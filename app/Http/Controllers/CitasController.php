@@ -149,9 +149,9 @@ class CitasController extends Controller
     public function mostrarcitas($id)
     {
         $medico = User::findorFail($id);
-        $usuarios= Cita::where('medico', $id)->get();
+        $citas= Cita::where('medico_id', $id)->get();
 
-        return view('citas.citasmedico',['usuarios'=>$usuarios, 'medico'=>$medico]);
+        return view('cite.medicocitas',['citas'=>$citas, 'medico'=>$medico]);
 
     }
     public function miscitas(){

@@ -20,16 +20,20 @@
                     <div class="panel-body">
                         <table class="table table-bordered">
                             <tr>
+                                <th>Fecha</th>
                                 <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th colspan="3" width="10%">Acciones</th>
+                                <th>Motivo</th>
+                                <th>Estado</th>
+                                <th colspan="2" width="5%">Acciones</th>
                             </tr>
-                            <?php ?>
-                            @foreach($usuarios as $usuario)
+                            @foreach($citas as $cita)
                                 <tr>
-                                    <td>{{$usuario->fecha}}</td>
-                                    <td>{{$usuario->user->nombre." ".$usuario->user->apellido}}</td>
-                                    <td><a href="{{url('/citas/'.$usuario->id.'/edit')}}" class="btn btn-primary">
+                                    <td>{{$cita->fecha}}</td>
+                                    <td>{{$cita->paciente->nombre." ".$cita->paciente->apellido}}</td>
+                                    <td>{{$cita->observaciones}}</td>
+                                    <td>{{$cita->status}}</td>
+                                    <td>
+                                        <a href="{{url('/cita/'.$cita->id.'/edit')}}" class="btn btn-primary">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>

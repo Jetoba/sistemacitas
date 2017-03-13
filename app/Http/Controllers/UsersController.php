@@ -221,6 +221,23 @@ class UsersController extends Controller
         return view('users.medicos',['medicos'=>$medicos]);
 
     }
+
+    public function asignar($id){
+        $user = User::findOrFail($id);
+        $especialidades = Especialidad::all();
+        return view('users.especialidadmedico', ['user' => $user, 'especialidades' => $especialidades]);
+    }
+
+    public function asignarespecializacion(Request $request, $id){
+
+
+        $user = User::findOrFail($id);
+        $user->especialidad()->detach(Especialidad::all());
+        $especializacion= $request->input('especializacion');
+        $user->especialidad()->attach($especializacion);
+        return redirect('/users')->with('mensaje', 'Especializacion Asignada Satisfactoriamente');
+    }
+
     public function mostrarcitas($id)
     {
         $medico = User::findorFail($id);
@@ -229,4 +246,6 @@ class UsersController extends Controller
         return view('citas.medicocitas',['usuario'=>$usuario, 'medico'=>$medico]);
 
     }
+
+
 }

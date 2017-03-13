@@ -18,17 +18,11 @@ class Cita extends Model
 
 
 
-    public function scopeStatus($query){
 
-
-        return $query->where('status','=','Asignada');
-
-
-    }
     public function scopeId($query, $id){
 
 
-        return $query->where('usuario_id','like','%$id%');
+        return $query->where('medico_id','like','%$id%');
 
 
     }
