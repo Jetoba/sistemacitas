@@ -9,7 +9,7 @@
 
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST"
-                              action="{{ url('/cita/'.$cita->id) }}">
+                              action="{{ url('/cite/'.$cita->id) }}">
                             {{ method_field('PUT') }}
                             {{ csrf_field() }}
 
@@ -19,7 +19,7 @@
 
                                 <div class="col-md-6">
                                     <input id="nombre" type="text" class="form-control" name="nombre"
-                                           value="{{ $cita->usuario_id->nombre or old('nombre') }}" readonly autofocus>
+                                           value="{{ $cita->paciente->nombre ." ".$cita->paciente->apellido }}" readonly autofocus>
 
                                     @if ($errors->has('nombre'))
                                         <span class="help-block">
@@ -34,8 +34,8 @@
 
                                 <div class="col-md-6">
                                     <select name="paciente" id="paciente" class="form-control" >
-                                        @foreach($medicos as $medico)
-                                            <option value="{{$medico->id}}" @if($medico->id == $cita->medico_id)selected @endif>{{$medico->nombre." ".$medico->apellido}}</option>
+                                        @foreach($docto as $docto)
+                                            <option value="{{$docto->id}}">{{$docto->nombre." ".$docto->apellido}}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('medico_id'))
@@ -51,7 +51,7 @@
 
                                 <div class="col-md-6">
                                     <input id="especialidades" type="text" class="form-control" name="nombre"
-                                           value="{{ $cita->especialidad_id->nombre or old('especialidades') }}" readonly autofocus>
+                                           value="{{ $cita->especialidad->nombre}}" readonly autofocus>
                                     @if ($errors->has('especialidades'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('especialidades') }}</strong>
@@ -60,26 +60,11 @@
                                 </div>
                             </div>
                             {{--fecha--}}
+
                             <div class="form-group{{ $errors->has('fecha') ? ' has-error' : '' }}">
                                 <label for="fecha" class="col-md-4 control-label">Fecha</label>
-
                                 <div class="col-md-6">
-                                    <input id="fecha" type="text" class="form-control" name="fecha"
-                                           value="{{ $cita->fecha or old('fecha') }}" readonly autofocus>
-                                    @if ($errors->has('fecha'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('fecha') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            {{--hora--}}
-                            <div class="form-group{{ $errors->has('fecha') ? ' has-error' : '' }}">
-                                <label for="fecha" class="col-md-4 control-label">Hora</label>
-
-                                <div class="col-md-6">
-                                    <input id="fecha" type="text" class="form-control" name="fecha"
-                                           value="{{ $cita->fecha or old('fecha') }}" readonly autofocus>
+                                    <input type="date" name="fecha" id="datepicker" size="12" value="{{ $cita->fecha or old('fecha') }}" />
                                     @if ($errors->has('fecha'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('fecha') }}</strong>
@@ -92,7 +77,7 @@
                                 <label for="status" class="col-md-4 control-label">Estado</label>
 
                                 <div class="col-md-6">
-                                    <select <select name="status" id="status" class="form-control" >
+                                   <select name="status" id="status" class="form-control" >
                                         <option value="pendiente">pendiente</option>
                                         <option value="Asignada">Asignada</option>
                                         <option value="vista">Vista</option>

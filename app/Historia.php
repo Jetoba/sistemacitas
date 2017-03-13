@@ -3,33 +3,37 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Historia extends Model
 {
     protected $table = 'historias';
+    use SoftDeletes;
 
     protected $fillable = [
-        'usuario_id','medico_id','recipe_id','informe'
+        'paciente_id','medico_id','informe', 'especialidad_id', 'cita_id'
     ];
 
-    public function user(){
+    //
+    public function paciente(){
 
-        return $this->belongsTo('App\User','usuario_id');
+        return $this->belongsTo('App\User','paciente_id');
     }
-
-    public function medicos(){
+    //
+    public function medico(){
 
         return $this->belongsTo('App\User','medico_id');
     }
-
+    //
     public function cita(){
 
-        return $this->belongsTo('App\Cita','historia_id');
+        return $this->belongsTo('App\Cita','cita_id');
+    }
+    //especialidad
+    public function especialidad(){
+
+        return $this->belongsTo('App\Especialidad','especialidad_id');
     }
 
-    public function recipe(){
-
-        return $this->hasOne('App\Recipe');
-    }
 
 }

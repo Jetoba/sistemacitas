@@ -19,7 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::resource('/cita', 'CitasController');
-Route::resource('/cita/edit', 'CitasController');
 Route::resource('/roles', 'RolesController');
 Route::resource('/users', 'UsersController');
 Route::resource('/medicinas', 'MedicinasController');

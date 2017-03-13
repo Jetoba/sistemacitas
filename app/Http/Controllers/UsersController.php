@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Especialidad;
-
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Validator;
@@ -27,7 +26,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(1);
+        $users = User::paginate(0);
         return view('users.index', ['users' => $users]);
     }
 
@@ -55,12 +54,12 @@ class UsersController extends Controller
             'nombre' => 'required|max:255',
             'apellido' => 'required|max:255',
             'cedula' => 'required|max:8|unique:users',
-            'fechanacimiento' => 'required',
-            'edad'=> 'max:255',
-            'sexo'=> 'required',
-            'telefono' => 'max:255',
-            'celular' => 'max:255',
-            'direccion'=> 'max:255',
+            'fechanacimiento'=>'required|date',
+            'edad'=>'required',
+            'sexo'=>'required',
+            'telefono' => 'required|max:255',
+            'direccion'=>'required|max:255',
+            'celular' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'role' => 'required',
@@ -86,7 +85,6 @@ class UsersController extends Controller
                 'direccion' => $request->input('direccion'),
                 'email' => $request->input('email'),
                 'password' => bcrypt($request->input('password')),
-                'especialidad_id' => $request->input('especialidad_id'),
 
 
             ]);
@@ -148,7 +146,7 @@ class UsersController extends Controller
             'email' => 'required|email|max:255|unique:users,email' . $id . ',id',
             'role' => 'required',
             'password' => 'min:6|confirmed',
-            'especialidad_id' => 'required',
+
 
         ]);
 
@@ -172,7 +170,6 @@ class UsersController extends Controller
                 'celular' => $request->input('celular'),
                 'direccion' => $request->input('direccion'),
                 'email' => $request->input('email'),
-                'especialidad_id' => $request->input('especialidad_id'),
 
 
             ]);
@@ -212,7 +209,8 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect('/home')->with('mensaje', 'Usuario eliminado satisfactoriamente');
     }
 
 
@@ -226,7 +224,7 @@ class UsersController extends Controller
     public function mostrarcitas($id)
     {
         $medico = User::findorFail($id);
-        $usuario= Cita::where('medico_id', $id)->get();
+        $usuario= Cita::where('medico', $id)->get();
 
         return view('citas.medicocitas',['usuario'=>$usuario, 'medico'=>$medico]);
 

@@ -18,7 +18,7 @@ class CitasController extends Controller
      */
     public function index()
     {
-        $citas = Cita::status()->paginate();
+        $citas = Cita::paginate();
         return view ('cite.index',['cita' => $citas]);
     }
 
@@ -29,6 +29,7 @@ class CitasController extends Controller
      */
     public function create()
     {
+
         $especialidades = Especialidad::all();
         return view('cite.create',['especialidades'=>$especialidades]);
     }
@@ -41,27 +42,27 @@ class CitasController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->input());
         $v = Validator::make($request->all(), [
             // validacion de campos input
-            'usuario_id'=>'required',
-            'observaciones'=>'required:255',
+            'paciente_id'=>'required',
+            'observaciones'=>'required|max:255',
             'especialidadades'=>'required',
         ]);
 
         if($v->fails()){
 
-            return redirect()->back()->withErrors($v)->withInput();
+            //return redirect()->back()->withErrors($v)->withInput();
         }
+
         try {
             \DB::beginTransaction();
 
             Cita::create([
-
                 //db                      campo input
-                'usuario_id'=>$request->input('usuario_id'),
-                'especialidad_id'=>$request->input('especialidadades'),
+                'paciente_id'=>$request->input('paciente_id'),
+                'especialidad_id'=>$request->input('especialidades'),
                 'observaciones'=>$request->input('observaciones'),
-
             ]);
 
         } catch (\Exception $v) {
@@ -70,7 +71,7 @@ class CitasController extends Controller
             \DB::commit();
         }
 
-        return redirect('/home')->with('mensaje', 'Cita creado con exito');
+        return redirect('/home')->with('mensaje', 'Cita creada con exito');
 
     }
 
@@ -95,7 +96,13 @@ class CitasController extends Controller
     public function edit($id)
     {
         $cita = Cita::findOrFail($id);
-        return view('cite.edit', ['cita'=>$cita]);
+        $paciente = User::findOrFail($cita->paciente_id);
+        $especialidades = Especialidad::all();
+        $user = User::all();
+//        $especialidad_cita = Especialidad::findOrFail($cita);
+//        $especialidad_medico = Especialidad::findOrFail($);
+//        $docto = User::findOrFail($especialidad_cita == $especialidad_medico);
+        return view('cite.edit', ['cita'=>$cita, 'especialidades'=>$especialidades, 'paciente'=>$paciente, 'docto'=>$docto]);
     }
 
     /**

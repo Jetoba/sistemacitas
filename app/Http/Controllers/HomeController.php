@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $id = Auth::user()->id;
         $recipes = Recipe::status('Pendiente');
-        $citas= Cita::where('usuario_id', $id)->get();
+        $citas= Cita::where('paciente_id', $id)->get();
         $cites= Cita::where('medico_id', $id)->get();
         return view('home',['citas'=>$citas, 'cites'=>$cites, 'recipes'=>$recipes]);
     }

@@ -25,8 +25,8 @@
                                     <tr>
                                         <td>{{$cita->fecha}}</td>
                                         <td>{{$cita->hora}}</td>
-                                        <td>{{$cita->medico_id->nombre." ".$cita->medico_id->apellido}}</td>
-                                        <td>{{$cita->especialidad_id->nombre}}</td>}
+                                        <td>{{$cita->medicox->nombre}}</td>
+                                        <td>{{$cita->especialidad->nombre}}</td>
                                         <td>{{$cita->status}}</td>
                                     </tr>
                                 @endforeach

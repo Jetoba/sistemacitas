@@ -3,19 +3,26 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Recipe extends Model
 {
-    protected $table = 'recipe';
+    protected $table = 'recipes';
+    use SoftDeletes;
 
     protected $fillable = [
 
-        'medicina_1', 'medicina_2', 'medicina_3', 'paciente_id',
-        'medico_id', 'status', 'observaciones',
+        'observaciones', 'cita_id'
        ];
 
-    protected function user(){
 
+    //RELACIONES
+
+    public function medicina(){
+        return $this->belongsToMany('App\Medicina','recipe_has_medicinas','recipe_id');
+    }
+
+    protected function user(){
 
         return $this->belongsTo('App\User', 'paciente_id');
     }
@@ -29,8 +36,9 @@ class Recipe extends Model
 
         return $this->belongsTo('App\Historia','recipe_id');
     }
-    public function ScopeStatus($query){
 
+    //SCOPE
+    public function ScopeStatus($query){
 
         return $query->where('status','=','Pendiente');
     }

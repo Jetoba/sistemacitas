@@ -3,57 +3,56 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cita extends Model
 {
     protected $table = 'citas';
 
+    use SoftDeletes;
+
     protected $fillable = [
 
-        'usuario_id', 'especialidad_id', 'medico_id', 'status',
-        'historia_id', 'observaciones', 'fecha', 'hora'
+        'fecha', 'status', 'observaciones', 'paciente_id', 'medico_id', 'especialidad_id',
     ];
 
 
 
-    public function ScopeStatus($query){
+    public function scopeStatus($query){
 
 
         return $query->where('status','=','Asignada');
 
 
     }
-    public function ScopeId($query, $id){
+    public function scopeId($query, $id){
 
 
         return $query->where('usuario_id','like','%$id%');
 
 
     }
-    public function Scopemedico($query, $id){
 
-
-        return $query->where('medico_id','like','%$id%');
-
-
-    }
     public function especialidad(){
 
 
         return $this->belongsTo('App\Especialidad','especialidad_id');
 
     }
-    public function user(){
 
-
-        return $this->belongsTo('App\User','usuario_id');
-    }
-
-    public function medico(){
+    public function medicox(){
 
 
         return $this->belongsTo('App\User','medico_id');
     }
+
+    public function paciente(){
+
+
+        return $this->belongsTo('App\User','paciente_id');
+    }
+
+
 
     public function historia(){
 

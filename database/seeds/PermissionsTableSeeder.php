@@ -16,12 +16,23 @@ class PermissionsTableSeeder extends Seeder
            'created_at' => \Carbon\Carbon::now(),
            'updated_at' => \Carbon\Carbon::now(),
         ]);
-//
-//        DB::table('permissions')->insert([
-//            'name'=> 'PermisosRole',
-//            'created_at' => \Carbon\Carbon::now(),
-//            'updated_at' => \Carbon\Carbon::now(),
-//        ]);
+
+        DB::table('permissions')->insert([
+            'name'=> 'IndexPaciente',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
+
+        DB::table('permissions')->insert([
+            'name'=> 'IndexFarmaceuta',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'=> 'IndexMedico',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
 //
 //        DB::table('permissions')->insert([
 //            'name'=> 'CrearRole',

@@ -14,14 +14,14 @@
 
 
                             {{--Paciente Id usuario--}}
-                            <div class="form-group{{ $errors->has('usuario_id') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Id Paciente</label>
+                            <div class="form-group{{ $errors->has('paciente_id') ? ' has-error' : '' }}">
+                                <label for="paciente_id" class="col-md-4 control-label">Id Paciente</label>
 
                                 <div class="col-md-6">
-                                    <input id="usuario_id" type="text" class="form-control" name="usuario_id" value="{{Auth::user()->id}}" readonly>
-                                    @if ($errors->has('usuario_id'))
+                                    <input id="paciente_id" type="text" class="form-control" name="paciente_id" value="{{Auth::user()->id}}" readonly>
+                                    @if ($errors->has('paciente_id'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('usuario_id') }}</strong>
+                                        <strong>{{ $errors->first('paciente_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -46,7 +46,7 @@
                                 <label for="informe" class=" col-md-4 control-label">Motivo</label>
                                 <div class="col-md-6">
                                     <textarea name="observaciones" id="observaciones" cols="10" rows="2"
-                                              class="form-control">{{$cita->observaciones or  old('observaciones')}}></textarea>
+                                              class="form-control">{{$cita->observaciones or  old('observaciones')}}</textarea>
 
                                     @if($errors->has('observaciones'))
                                         <span class="help-block"></span>

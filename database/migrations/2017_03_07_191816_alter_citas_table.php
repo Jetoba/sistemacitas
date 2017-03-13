@@ -14,10 +14,16 @@ class AlterCitasTable extends Migration
     public function up()
     {
         Schema::table('citas', function (Blueprint $table) {
-            $table->integer('historia_id')->unsigned()->default(1);
-            $table->foreign('historia_id')->references('id')->on('historias');
+            $table->integer('paciente_id')->unsigned();
+            $table->foreign('paciente_id')->references('id')->on('users')->delete('cascade');;
 
-            $table->unique(['usuario_id','medico_id','fecha']);
+            $table->unsignedInteger('medico_id')->default(5);
+            $table->foreign('medico_id')->references('id')->on('users')->delete('cascade');;
+
+            $table->unsignedInteger('especialidad_id');
+            $table->foreign('especialidad_id')->references('id')->on('especialidades')->delete('cascade');;
+
+            $table->unique(['paciente_id','especialidad_id','fecha']);
         });
     }
 

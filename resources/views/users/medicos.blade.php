@@ -41,7 +41,7 @@
                                     <td>{{ $medico->nombre }}</td>
                                     <td>{{ $medico->apellido }}</td>
                                     <td>{{ $medico->cedula }}</td>
-                                    <td>{{ $medico->especialidad_id}}</td>
+                                    <td>{{ $medico->especialidad[0]->nombre}}</td>
                                     <td><a href="" class="btn btn-primary">
                                            Citas
                                         </a>

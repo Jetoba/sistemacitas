@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterUsersTable extends Migration
+class AlterRecipesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class AlterUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-
-            $table->integer('especialidad_id')->default(4)->unsigned();
-            $table->foreign('especialidad_id')->references('id')->on('especialidades');
-
+        Schema::table('recipes', function (Blueprint $table) {
+            $table->unsignedInteger('cita_id');
+            $table->foreign('cita_id')->references('id')->on('citas')->delete('cascade');
         });
     }
 
@@ -28,7 +26,7 @@ class AlterUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('recipes', function (Blueprint $table) {
             //
         });
     }
