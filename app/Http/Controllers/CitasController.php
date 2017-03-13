@@ -98,11 +98,8 @@ class CitasController extends Controller
         $cita = Cita::findOrFail($id);
         $paciente = User::findOrFail($cita->paciente_id);
         $especialidades = Especialidad::all();
-        $user = User::all();
-//        $especialidad_cita = Especialidad::findOrFail($cita);
-//        $especialidad_medico = Especialidad::findOrFail($);
-//        $docto = User::findOrFail($especialidad_cita == $especialidad_medico);
-        return view('cite.edit', ['cita'=>$cita, 'especialidades'=>$especialidades, 'paciente'=>$paciente, 'docto'=>$docto]);
+        $medicos = User::role('Medico')->get();
+        return view('cite.edit', ['cita'=>$cita, 'especialidades'=>$especialidades, 'paciente'=>$paciente, 'medicos'=>$medicos]);
     }
 
     /**
@@ -114,7 +111,21 @@ class CitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        try {
+            \DB::beginTransaction();
+            $cita = Cita::findOrFail($id);
+            $cita->update([
+                'fecha' => $request->input('fecha'),
+                'medico_id' => $request->input('medico'),
+                'status' => ($request->input('status')),
+            ]);
+        } catch (\Exception $e) {
+            \DB::rollback();
+        } finally {
+            \DB::commit();
+        }
+        return redirect('/cita')->with('mensaje', 'Cita editada Exitosamente');
     }
 
     /**
@@ -125,7 +136,8 @@ class CitasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cita::destroy($id);
+        return redirect('/cita')->with('mensaje', 'Cita eliminada satisfactoriamente');
     }
 
     public function medicosindex(){

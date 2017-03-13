@@ -9,38 +9,41 @@
 
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST"
-                              action="{{ url('/cite/'.$cita->id) }}">
+                              action="{{ url('/cita/'.$cita->id) }}">
                             {{ method_field('PUT') }}
                             {{ csrf_field() }}
 
                             {{--NOMBRE PACIENTE--}}
-                            <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-                                <label for="nombre" class="col-md-4 control-label">Paciente</label>
+                            <div class="form-group{{ $errors->has('paciente') ? ' has-error' : '' }}">
+                                <label for="paciente" class="col-md-4 control-label">Paciente</label>
 
                                 <div class="col-md-6">
-                                    <input id="nombre" type="text" class="form-control" name="nombre"
-                                           value="{{ $cita->paciente->nombre ." ".$cita->paciente->apellido }}" readonly autofocus>
+                                    <select name="paciente" id="paciente" class="form-control" >
+                                            <option value="{{$cita->paciente->id}}"  autofocus>{{$cita->paciente->nombre." ".$cita->paciente->apellido}}</option>
+                                    </select>
+                                    {{--<input id="paciente" type="text" class="form-control" name="paciente"--}}
+                                           {{--value="{{ $cita->paciente->nombre ." ".$cita->paciente->apellido }}" readonly autofocus>--}}
 
-                                    @if ($errors->has('nombre'))
+                                    @if ($errors->has('paciente'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('nombre') }}</strong>
+                                        <strong>{{ $errors->first('paciente') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
                             {{--MEDICO NOMBRE--}}
-                            <div class="form-group{{ $errors->has('medico_id') ? ' has-error' : '' }}">
-                                <label for="medico_io" class="col-md-4 control-label">Doctor</label>
+                            <div class="form-group{{ $errors->has('medico') ? ' has-error' : '' }}">
+                                <label for="medico" class="col-md-4 control-label">Doctor</label>
 
                                 <div class="col-md-6">
-                                    <select name="paciente" id="paciente" class="form-control" >
-                                        @foreach($docto as $docto)
-                                            <option value="{{$docto->id}}">{{$docto->nombre." ".$docto->apellido}}</option>
+                                    <select name="medico" id="medico" class="form-control" >
+                                        @foreach($medicos as $medico)
+                                            <option value="{{$medico->id}}">{{$medico->nombre." ".$medico->apellido ." (".$medico->especialidad[0]->nombre.")"}}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('medico_id'))
+                                    @if ($errors->has('medico'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('medico_id') }}</strong>
+                                        <strong>{{ $errors->first('medico') }}</strong>
                                     </span>
                                     @endif
                                 </div>

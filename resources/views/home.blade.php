@@ -16,7 +16,6 @@
                             <table class="table table-bordered" style="margin-top: 1%;">
                                 <tr>
                                     <th>Fecha</th>
-                                    <th>Hora</th>
                                     <th>Medico</th>
                                     <th>Especilidad</th>
                                     <th>Estado</th>
@@ -24,8 +23,7 @@
                                 @foreach($citas as $cita)
                                     <tr>
                                         <td>{{$cita->fecha}}</td>
-                                        <td>{{$cita->hora}}</td>
-                                        <td>{{$cita->medicox->nombre}}</td>
+                                        <td>{{$cita->medicox->nombre . " ". $cita->medicox->apellido}}</td>
                                         <td>{{$cita->especialidad->nombre}}</td>
                                         <td>{{$cita->status}}</td>
                                     </tr>
