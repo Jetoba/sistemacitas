@@ -21,9 +21,6 @@
                                     <select name="paciente" id="paciente" class="form-control" >
                                             <option value="{{$cita->paciente->id}}"  autofocus>{{$cita->paciente->nombre." ".$cita->paciente->apellido}}</option>
                                     </select>
-                                    {{--<input id="paciente" type="text" class="form-control" name="paciente"--}}
-                                           {{--value="{{ $cita->paciente->nombre ." ".$cita->paciente->apellido }}" readonly autofocus>--}}
-
                                     @if ($errors->has('paciente'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('paciente') }}</strong>

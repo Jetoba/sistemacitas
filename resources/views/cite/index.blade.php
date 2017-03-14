@@ -18,8 +18,8 @@
                     <div class="panel-heading" >Listado de Citas</div>
                     <div class="panel-body">
                         <a href="{{url('/medicos')}}" class="btn btn-success">
-                            <i class="fa fa-user"></i> Medico y sus citas</a>
-                        <table class="table table-bordered" style="margin-top: 1%;">
+                            <i class="fa fa-user"></i> Medicos</a>
+                        <table class="table table-bordered" style=" margin-top: 1%;">
                             <tr>
                                 <th>Fecha</th>
                                 <th>Medico</th>

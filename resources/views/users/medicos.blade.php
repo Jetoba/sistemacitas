@@ -17,15 +17,11 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
 
-                    <div class="panel-heading">Medicos</div>
+                    <div class="panel-heading">  Listado de Medicos</div>
 
                     <div class="panel-body">
-                        Listado de Medicos
 
 
-                            <a href="{{ url('/users/create') }}" class="btn btn-success">
-                                <i class="fa fa-user"></i> Nuevo Usuario
-                            </a>
 
 
                         <table class="table table-bordered">
@@ -34,14 +30,14 @@
                                 <th>Apellido</th>
                                 <th>Cedula</th>
                                 <th>Especialidad</th>
-                                <th width="5%" colspan="3">Acciones</th>
+                                <th width="5%" colspan="3"></th>
                             </tr>
                             @foreach($medicos as $medico)
                                 <tr>
                                     <td>{{ $medico->nombre }}</td>
                                     <td>{{ $medico->apellido }}</td>
                                     <td>{{ $medico->cedula }}</td>
-                                    <td>{{ $medico->especialidad[0]->nombre}}</td>
+                                    <td>{{ @$medico->especialidad[0]->nombre}}</td>
 
                                     <td>
                                         <a href="{{url('/cita/'.$medico->id.'/citamedico')}}" class="btn btn-primary">
@@ -58,7 +54,7 @@
                                         </a>
                                     </td>
 
-
+                                    </td>
                                 </tr>
                             @endforeach
                             <tr>

@@ -15,41 +15,53 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Medicinas</div>
+                    <div class="panel-heading">Usuarios</div>
 
                     <div class="panel-body">
-                        Listado de Medicinas
+                        Listado de Usuarios
 
-                        <a href="{{ url('/medicinas/create') }}" class="btn btn-success">
-                            <i class="fa fa-user"></i> Agregar Medicina
+                        <a href="{{ url('/users/create') }}" class="btn btn-success">
+                            <i class="fa fa-user"></i> Agregar Usuario
                         </a>
 
                         <table class="table table-bordered">
                             <tr>
                                 <th>Nombre</th>
-                                <th width="10%" colspan="2">Acciones</th>
+                                <th>Cedula</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th colspan="3" width="10%" >Acciones</th>
                             </tr>
-                            @foreach($medicinas as $medicina)
+                            @foreach($users as $user)
                                 <tr>
-                                    <td>{{ $medicina->nombre }}</td>
+                                    <td>{{ $user->nombre ." " . $user->apellido }}</td>
+                                    <td>{{ $user->cedula }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->roles[0]->name }}</td>
                                     <td>
-                                        <a href="{{ url('medicinas/'.$medicina->id.'/edit') }}" class="btn btn-primary">
+                                        <a href="{{ url('usuarios/'.$user->id.'/permisos') }}" class="btn btn-warning">
+                                            <i class="fa fa-id-card"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('usuarios/'.$user->id.'/edit') }}" class="btn btn-primary">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
                                     <td>
                                         <button class="btn btn-danger"
-                                                data-action="{{ url('/medicinas/'.$medicina->id) }}"
-                                                data-name="{{ $medicina->nombre }}"
+                                                data-action="{{ url('/usuarios/'.$user->id) }}"
+                                                data-name="{{ $user->name }}"
                                                 data-toggle="modal" data-target="#confirm-delete">
                                             <i class="fa fa-trash fa-1x"></i>
                                         </button>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
+
                             <tr>
                                 <td colspan="6" class="text-center">
-                                    {{ $medicinas->links() }}
+                                    {{ $users->links() }}
                                 </td>
                             </tr>
                         </table>

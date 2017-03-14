@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Cita;
+use App\Medicina;
 use Illuminate\Http\Request;
 
 class RecipesController extends Controller
@@ -21,9 +23,10 @@ class RecipesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $cita = Cita::findOrFail($id);
+        return view('recipes.create', ['cita'=>$cita, 'medicinas'=>$medicinas]);
     }
 
     /**
@@ -80,5 +83,14 @@ class RecipesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function asignarespecializacion(Request $request, $id)
+    {
+
+
+//        $user = User::findOrFail($id);
+//        $user->especialidad()->sync($request->input('especialidades'));
+//        return redirect('/medicos')->with('mensaje', 'Especializacion Asignada Satisfactoriamente');
     }
 }

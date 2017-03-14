@@ -19,9 +19,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::resource('/cita', 'CitasController');
+Route::resource('/usuarios', 'UsersController');
 Route::resource('/roles', 'RolesController');
 Route::resource('/users', 'UsersController');
+Route::resource('/historias', 'HistoriasController@store');
+Route::get('/usuarios/{id}/permisos','UsersController@permisos');
+Route::put('/usuarios/{id}/asignarpermisos','UsersController@asignarPermisos');
 Route::get('/cita/{id}/citamedico', 'CitasController@mostrarcitas');
+Route::get('/historia/{id}/historiapaciente', 'HistoriasController@mostrarhistoria');
+Route::get('/historia/{id}/create', 'HistoriasController@create');
+Route::get('/recipe/{id}/create', 'RecipesController@create');
 Route::get('/medico/{id}/asignar', 'UsersController@asignar');
 Route::put('/medico/{id}/especializacion', 'userscontroller@asignarespecializacion');
 Route::resource('/medicinas', 'MedicinasController');

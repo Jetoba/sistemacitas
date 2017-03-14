@@ -35,5 +35,12 @@ class Historia extends Model
         return $this->belongsTo('App\Especialidad','especialidad_id');
     }
 
+    public function scopeId($query, $id){
+
+
+        return $query->where('paciente_id','like','%$id%');
+
+
+    }
 
 }

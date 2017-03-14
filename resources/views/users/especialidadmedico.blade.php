@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Editar role</div>
+                    <div class="panel-heading">Asignar Especializacion</div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST"
@@ -18,7 +18,8 @@
 
                                 <div class="col-md-6">
                                     <input id="nombre" type="text" class="form-control" name="nombre"
-                                           value="{{ "Dr ".$user->nombre ." ". $user->apellido }}" readonly required autofocus>
+                                           value="{{ "Dr ".$user->nombre ." ". $user->apellido }}" readonly required
+                                           autofocus>
 
                                     @if ($errors->has('nombre'))
                                         <span class="help-block">
@@ -33,11 +34,23 @@
                                 <label for="especialidades" class="col-md-4 control-label">Especialidades</label>
 
                                 <div class="col-md-6">
+                                    <?php $checked = ""; ?>
                                     @foreach($especialidades as $especialidad)
+                                        @for($i=0;$i < $user->especialidad->count(); $i++)
+                                            @if($user->especialidad[$i]->id==$especialidad->id)
+                                                <?php $checked = "checked"; ?>
+                                                @break;
+                                            @else
+                                                <?php $checked = ""; ?>
+                                                @break;
+                                            @endif
+                                        @endfor
+
                                         <label class="checkbox-inline">
-                                            <input class="i-check" type="checkbox"  id="especialidades" name="especialidades[]"
-                                                   value="{{$especialidad->id}}">
-                                                   {{$especialidad->nombre}}
+                                            <input class="i-check" type="checkbox" id="especialidades"
+                                                   name="especialidades[]"
+                                                   value="{{$especialidad->id}}" {{ $checked }}>
+                                            {{$especialidad->nombre}}
                                         </label><br>
                                     @endforeach
                                     @if ($errors->has('especialidades'))

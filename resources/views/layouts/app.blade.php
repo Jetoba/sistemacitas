@@ -54,11 +54,12 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
+                            <li><a href="{{ url('/usuarios') }}">Usuarios</a></li>
                             <li><a href="{{ url('/roles') }}">Roles</a></li>
                             <li><a href="{{ url('/permisos') }}">Permisos</a></li>
                             <li><a href="{{ url('/medicinas') }}">Medicinas</a></li>
                             <li><a href="{{ url('/especialidades') }}">Especialidades</a></li>
-                            <li><a href="{{ url('/medicos') }}">Medicos</a></li>
+
                             <li><a href="{{ url('/cita') }}">Citas</a></li>
                             <li><a href="{{ url('/home') }}">Inicio</a></li>
                             <li class="dropdown">

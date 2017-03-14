@@ -26,8 +26,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(0);
-        return view('users.index', ['users' => $users]);
+        $users = User::paginate(10);
+        $roles = Role::all();
+        return view('users.index', ['users' => $users, 'roles' => $roles]);
     }
 
     /**
@@ -45,7 +46,7 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,11 +55,11 @@ class UsersController extends Controller
             'nombre' => 'required|max:255',
             'apellido' => 'required|max:255',
             'cedula' => 'required|max:8|unique:users',
-            'fechanacimiento'=>'required|date',
-            'edad'=>'required',
-            'sexo'=>'required',
+            'fechanacimiento' => 'required|date',
+            'edad' => 'required',
+            'sexo' => 'required',
             'telefono' => 'required|max:255',
-            'direccion'=>'required|max:255',
+            'direccion' => 'required|max:255',
             'celular' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
@@ -96,13 +97,13 @@ class UsersController extends Controller
         } finally {
             \DB::commit();
         }
-        return redirect('/medicos')->with('mensaje', 'Rol creado satisfactoriamente');
+        return redirect('/home')->with('mensaje', 'Usuario creado satisfactoriamente');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -113,52 +114,30 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $roles = Role::all();
         $user = User::findOrFail($id);
-        $especialidades = Especialidad::all();
-        return view('users.edit', ['user' => $user,'roles'=>$roles,'especialidades'=>$especialidades ]);
+        return view('users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $v = Validator::make($request->all(), [
-            'nombre' => 'required|max:255',
-            'apellido' => 'required|max:255',
-            'cedula' => 'required|max:8|unique:users,cedula' . $id . ',id',
-            'fechanacimiento' => 'max:255',
-            'edad'=> 'max:255',
-            'sexo'=> 'max:255',
-            'telefono' => 'max:255',
-            'celular' => 'max:255',
-            'direccion'=> 'max:255',
-            'email' => 'required|email|max:255|unique:users,email' . $id . ',id',
-            'role' => 'required',
-            'password' => 'min:6|confirmed',
 
-
-        ]);
-
-        if ($v->fails()) {
-            return redirect()->back()->withErrors($v)->withInput();
-        }
 
         try {
             \DB::beginTransaction();
-
             $user = User::findOrFail($id);
-
             $user->update([
                 'nombre' => $request->input('nombre'),
                 'apellido' => $request->input('apellido'),
@@ -170,8 +149,6 @@ class UsersController extends Controller
                 'celular' => $request->input('celular'),
                 'direccion' => $request->input('direccion'),
                 'email' => $request->input('email'),
-
-
             ]);
 
             if ($request->input('password')) {
@@ -189,22 +166,21 @@ class UsersController extends Controller
             }
 
 
-            $user ->syncRoles($request->input('role'));
+            $user->syncRoles($request->input('role'));
 
         } catch (\Exception $e) {
-            echo $e->getMessage();
             \DB::rollback();
         } finally {
             \DB::commit();
         }
 
-        return redirect('/medicos')->with('mensaje', 'Usuario actualizado satisfactoriamente');
+        return $user;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -214,37 +190,54 @@ class UsersController extends Controller
     }
 
 
-    public function medicosindex(){
+    public function medicosindex()
+    {
 
 
         $medicos = User::role('Medico')->paginate();
-        return view('users.medicos',['medicos'=>$medicos]);
+        return view('users.medicos', ['medicos' => $medicos]);
 
     }
 
-    public function asignar($id){
+    public function asignar($id)
+    {
         $user = User::findOrFail($id);
         $especialidades = Especialidad::all();
         return view('users.especialidadmedico', ['user' => $user, 'especialidades' => $especialidades]);
     }
 
-    public function asignarespecializacion(Request $request, $id){
+    public function asignarespecializacion(Request $request, $id)
+    {
 
 
         $user = User::findOrFail($id);
-        $user->especialidad()->detach(Especialidad::all());
-        $especializacion= $request->input('especializacion');
-        $user->especialidad()->attach($especializacion);
-        return redirect('/users')->with('mensaje', 'Especializacion Asignada Satisfactoriamente');
+        $user->especialidad()->sync($request->input('especialidades'));
+        return redirect('/medicos')->with('mensaje', 'Especializacion Asignada Satisfactoriamente');
     }
 
     public function mostrarcitas($id)
     {
         $medico = User::findorFail($id);
-        $usuario= Cita::where('medico', $id)->get();
+        $usuario = Cita::where('medico', $id)->get();
 
-        return view('citas.medicocitas',['usuario'=>$usuario, 'medico'=>$medico]);
+        return view('citas.medicocitas', ['usuario' => $usuario, 'medico' => $medico]);
 
+    }
+
+    public function permisos($id)
+    {
+        $user = User::findOrFail($id);
+        $permisos = Permission::all();
+        return view('users.permisos', ['user' => $user, 'permisos' => $permisos]);
+    }
+
+    public function asignarPermisos(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->revokePermissionTo(Permission::all());
+        if ($request->input('permisos'))
+            $user->givePermissionTo($request->input('permisos'));
+        return redirect('/usuarios')->with('mensaje', 'Permisos Asignados Satisfactoriamente');
     }
 
 
