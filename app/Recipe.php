@@ -38,7 +38,7 @@ class Recipe extends Model
     //SCOPE
     public function ScopeStatus($query){
 
-        return $query->where('status','=','Pendiente');
+        return $query->where('status','=','Asignado');
     }
 
     public function scopeId($query, $id){

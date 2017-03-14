@@ -32,6 +32,8 @@ Route::resource('/recipes', 'RecipesController');
 Route::get('/recipe/{id}/recipescita', 'RecipesController@recipescita');
 Route::get('/recipe/{id}/asignar', 'RecipesController@asigne');
 Route::put('/recipe/{id}/asignarmedicina', 'RecipesController@asignarmedicina');
+Route::get('/recipe/{id}/medicinas', 'RecipesController@edit');
+
 
 Route::get('/historia/{id}/create', 'HistoriasController@create');
 Route::get('/recipe/{id}/create', 'RecipesController@create');

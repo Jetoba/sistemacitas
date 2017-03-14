@@ -84,7 +84,9 @@ class RecipesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $recipe = Recipe::findOrFail($id);
+        $medicinas= Medicina::all();
+        return view('Recipe.edit', ['recipe'=>$recipe, 'medicina'=>$medicinas]);
     }
 
     /**

@@ -93,18 +93,20 @@
                                     <tr>
                                         <th>Doctor</th>
                                         <th>Paciente</th>
-                                        <th>Medicina 1</th>
-                                        <th>Medicina 2</th>
-                                        <th>Medicina 3</th>
+
+
                                         <th colspan="3" width="10%">Acciones</th>
                                     </tr>
                                     @foreach($recipes as $recipe)
                                         <tr>
-                                            <td>{{$recipe->medico_id->nombre." ".$recipe->medico_id->apellido}}</td>
-                                            <td>{{$recipe->usuario_id->nombre." ".$recipe->usuario_id->apellido}}</td>
-                                            <td>{{$recipe->medicina_1}}</td>
-                                            <td>{{$recipe->medicina_2}}</td>
-                                            <td>{{$recipe->medicina_3}}</td>
+                                            <td>{{$recipe->cita->medicox->nombre." ".$recipe->cita->medicox->apellido}}</td>
+                                            <td>{{$recipe->cita->paciente->nombre." ".$recipe->cita->paciente->apellido}}</td>
+                                            <td>
+                                                <a href="{{ url('/recipe/'.$recipe->id.'/medicinas')}}" class="btn btn-primary">
+                                                    H
+                                                </a>
+                                            </td>
+
                                         </tr>
                                     @endforeach
                                 </table>
