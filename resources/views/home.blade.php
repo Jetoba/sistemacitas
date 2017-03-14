@@ -38,13 +38,16 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="panel-body">
+                                <a href="" class="btn btn-success">
+                                    <i class="fa fa-user"></i> Recipes
+                                </a>
                                 <table class="table table-bordered" style="margin-top: 1%;">
                                     <tr>
                                         <th>Fecha</th>
                                         <th>Paciente</th>
                                         <th>Estado</th>
                                         <th>Informe</th>
-                                        <th colspan="3" width="10%">Acciones</th>
+                                        <th colspan="4" width="10%">Acciones</th>
 
                                     </tr>
                                     @foreach($cites as $cite)
@@ -55,17 +58,22 @@
                                             <td>{{$cite->observaciones}}</td>
                                             <td>
                                                 <a href="{{ url('/historia/'.$cite->paciente->id.'/historiapaciente')}}" class="btn btn-primary">
-                                                    <i class="fa fa-edit"></i>
+                                                    H
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ url('/recipe/'.$cite->id.'/create')}}" class="btn btn-primary">
+                                                <a href="{{ url('/historia/'.$cite->id.'/create')}}" class="btn btn-primary">
                                                    crear
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-warning">
-                                                    <i class="fa fa-id-card"></i>
+                                                <a href="{{ url('/recipe/'.$cite->id.'/create')}}" class="btn btn-warning">
+                                                    CR
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ url('/recipe/'.$cite->id.'/recipescita')}}" class="btn btn-warning">
+                                                    HR
                                                 </a>
                                             </td>
                                         </tr>

@@ -21,7 +21,7 @@ class Medicina extends Model
     ];
 
     public function recipe(){
-        return $this->belongsToMany('App\Recipe','recipe_has_medicinas','medicina_id');
+        return $this->belongsToMany('App\Recipe','recipe_has_medicinas','medicina_id','recipe_id');
     }
 
 }

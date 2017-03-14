@@ -12,34 +12,40 @@ class Recipe extends Model
 
     protected $fillable = [
 
-        'observaciones', 'cita_id'
+        'observaciones', 'cita_id', 'status', 'farmaceuta_id'
        ];
 
 
     //RELACIONES
 
     public function medicina(){
-        return $this->belongsToMany('App\Medicina','recipe_has_medicinas','recipe_id');
+        return $this->belongsToMany('App\Medicina','recipe_has_medicinas','recipe_id','medicina_id');
     }
 
-    protected function user(){
+    public function cita(){
 
-        return $this->belongsTo('App\User', 'paciente_id');
+
+        return $this->belongsTo('App\Cita','cita_id');
     }
-    public function medico(){
+
+    public function farmaceuta(){
 
 
-        return $this->belongsTo('App\User','medico_id');
+        return $this->belongsTo('App\User','farmaceuta_id');
     }
-    public function historia(){
 
-
-        return $this->belongsTo('App\Historia','recipe_id');
-    }
 
     //SCOPE
     public function ScopeStatus($query){
 
         return $query->where('status','=','Pendiente');
+    }
+
+    public function scopeId($query, $id){
+
+
+        return $query->where('cita_id','like','%$id%');
+
+
     }
 }

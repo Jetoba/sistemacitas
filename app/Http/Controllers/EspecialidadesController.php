@@ -135,4 +135,6 @@ class EspecialidadesController extends Controller
         Especialidad::destroy($id);
         return redirect('/especialidades')->with('mensaje', 'Especialidad eliminada satisfactoriamente');
     }
+
+
 }

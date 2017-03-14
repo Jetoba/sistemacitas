@@ -46,7 +46,10 @@ class Cita extends Model
         return $this->belongsTo('App\User','paciente_id');
     }
 
+    public function recipe(){
 
+        return $this->HasOne('App\Recipe');
+    }
 
     public function historia(){
 

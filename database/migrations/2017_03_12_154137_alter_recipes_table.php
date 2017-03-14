@@ -16,6 +16,8 @@ class AlterRecipesTable extends Migration
         Schema::table('recipes', function (Blueprint $table) {
             $table->unsignedInteger('cita_id');
             $table->foreign('cita_id')->references('id')->on('citas')->delete('cascade');
+            $table->unsignedInteger('farmaceuta_id')->nullable();
+            $table->foreign('farmaceuta_id')->references('id')->on('citas')->delete('cascade');
         });
     }
 

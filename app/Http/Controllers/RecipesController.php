@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Cita;
 use App\Medicina;
+use App\Recipe;
+use App\User;
+use Validator;
 use Illuminate\Http\Request;
 
 class RecipesController extends Controller
@@ -26,7 +29,7 @@ class RecipesController extends Controller
     public function create($id)
     {
         $cita = Cita::findOrFail($id);
-        return view('recipes.create', ['cita'=>$cita, 'medicinas'=>$medicinas]);
+        return view('recipe.create', ['cita'=>$cita]);
     }
 
     /**
@@ -37,7 +40,29 @@ class RecipesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $v = Validator::make($request->all(), [
+            'observaciones' => 'required|max:300',
+
+        ]);
+
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+        try {
+            \DB::beginTransaction();
+
+           Recipe::create([
+                'observaciones' => $request->input('observaciones'),
+                'cita_id' => $request->input('cita_id'),
+
+            ]);
+
+        } catch (\Exception $v) {
+            \DB::rollback();
+        } finally {
+            \DB::commit();
+        }
+        return redirect('/home')->with('mensaje', 'Recipe Agregado satisfactoriamente');
     }
 
     /**
@@ -85,12 +110,27 @@ class RecipesController extends Controller
         //
     }
 
-    public function asignarespecializacion(Request $request, $id)
+    public function recipescita($id)
+    {
+        $citas = Cita::findorFail($id);
+        $recipes= Recipe::where('cita_id', $id)->get();
+        return view('recipe.recipescita',['recipes'=>$recipes, 'citas'=>$citas]);
+
+    }
+
+    public function asigne($id)
+    {
+        $recipe = Recipe::findOrFail($id);
+        $medicinas = Medicina::all();
+        return view('recipe.asignarmedicinas', ['recipe' => $recipe, 'medicinas' => $medicinas]);
+    }
+
+    public function asignarmedicina(Request $request, $id)
     {
 
-
-//        $user = User::findOrFail($id);
-//        $user->especialidad()->sync($request->input('especialidades'));
-//        return redirect('/medicos')->with('mensaje', 'Especializacion Asignada Satisfactoriamente');
+        $recipe = Recipe::findOrFail($id);
+        $recipe->medicina()->attach($request->input('medicinas'));
+        return redirect('/home')->with('mensaje', 'Medicinas agregadas al recipe Satisfactoriamente');
     }
+
 }

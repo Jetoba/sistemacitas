@@ -16,6 +16,7 @@ class CreateRecipesTable extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->increments('id');
             $table->text('observaciones');
+            $table->enum('status',['Asignado','Despachado'])->default('Asignado');
             ;$table->timestamps();
             $table->softDeletes();
 
