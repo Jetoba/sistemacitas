@@ -38,6 +38,11 @@
                                                 <td>{{$cita->status}}</td>
                                             </tr>
                                         @endforeach
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                {{ $citas->links()}}
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -87,6 +92,11 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                {{ $cites->links()}}
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -117,6 +127,11 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                {{ $recipes->links()}}
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>

@@ -118,7 +118,7 @@ class HistoriasController extends Controller
     public function mostrarhistoria($id)
     {
         $paciente = User::findorFail($id);
-        $historias= Historia::where('paciente_id', $id)->get();
+        $historias= Historia::where('paciente_id', $id)->paginate(10);
 
         return view('historias.citaspaciente',['historias'=>$historias, 'paciente'=>$paciente,]);
 

@@ -28,9 +28,9 @@ class HomeController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        $recipes = Recipe::status()->paginate();
-        $citas= Cita::where('paciente_id', $id)->get();
-        $cites= Cita::where('medico_id', $id)->get();
+        $recipes = Recipe::status()->paginate(10);
+        $citas= Cita::where('paciente_id', $id)->paginate(10);
+        $cites= Cita::where('medico_id', $id)->paginate(10);
         return view('home',['citas'=>$citas, 'cites'=>$cites, 'recipes'=>$recipes]);
     }
 

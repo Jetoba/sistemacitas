@@ -46,11 +46,12 @@
                                     </td>
                                 </tr>
                             @endforeach
-
-                            {{-- <th colspan="4" class="text-center">{{$usuarios->links()}}</th>--}}
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    {{ $recipes->links()}}
+                                </td>
+                            </tr>
                         </table>
-
-
                     </div>
                 </div>
             </div>

@@ -18,8 +18,9 @@ class CitasController extends Controller
      */
     public function index()
     {
-        $citas = Cita::paginate();
-        return view ('cite.index',['cita' => $citas]);
+        $citas = Cita::pendiente()->paginate(10);
+        return view ('cite.index',['citas' => $citas]);
+
     }
 
     /**
@@ -149,7 +150,8 @@ class CitasController extends Controller
     public function mostrarcitas($id)
     {
         $medico = User::findorFail($id);
-        $citas= Cita::where('medico_id', $id)->get();
+        $citas= Cita::where('medico_id', $id)->paginate(10);
+
 
         return view('cite.medicocitas',['citas'=>$citas, 'medico'=>$medico]);
 

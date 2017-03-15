@@ -129,7 +129,7 @@ class RecipesController extends Controller
     public function recipescita($id)
     {
         $citas = Cita::findorFail($id);
-        $recipes= Recipe::where('cita_id', $id)->get();
+        $recipes= Recipe::where('cita_id', $id)->paginate(10);
         return view('recipe.recipescita',['recipes'=>$recipes, 'citas'=>$citas]);
 
     }

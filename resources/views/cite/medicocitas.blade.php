@@ -39,7 +39,11 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            {{-- <th colspan="4" class="text-center">{{$usuarios->links()}}</th>--}}
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    {{ $citas->links()}}
+                                </td>
+                            </tr>
                         </table>
 
 

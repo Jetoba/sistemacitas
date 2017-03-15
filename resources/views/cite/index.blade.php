@@ -28,7 +28,7 @@
                                 <th>Estado</th>
                                 <th colspan="3" width="10%">Acciones</th>
                             </tr>
-                            @foreach($cita as $cita)
+                            @foreach($citas as $cita)
                                 <tr>
                                     <td>{{$cita->fecha}}</td>
                                     <td>{{$cita->medicox->nombre . " " . $cita->medicox->apellido}}</td>
@@ -50,7 +50,11 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            {{-- <th colspan="4" class="text-center">{{$citas->links()}}</th>--}}
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    {{ $citas->links() }}
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>

@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -7,7 +6,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="alert alert-info alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                         <strong>Info:</strong> {{ session('mensaje') }}.
                     </div>
                 </div>
@@ -16,14 +16,8 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-
-                    <div class="panel-heading">  Listado de Medicos</div>
-
+                    <div class="panel-heading"> Listado de Medicos</div>
                     <div class="panel-body">
-
-
-
-
                         <table class="table table-bordered">
                             <tr>
                                 <th>Nombre</th>
@@ -38,25 +32,24 @@
                                     <td>{{ $medico->apellido }}</td>
                                     <td>{{ $medico->cedula }}</td>
                                     <td>{{ @$medico->especialidad[0]->nombre}}</td>
-
                                     <td>
                                         <a href="{{url('/cita/'.$medico->id.'/citamedico')}}" class="btn btn-primary">
                                             Citas
                                         </a>
-
                                     </td>
-
-
                                     <td>
                                         <a href="{{ url('medico/'.$medico->id.'/asignar') }}" class="btn btn-warning">
-
                                             <i class="fa fa-id-card"></i>
                                         </a>
                                     </td>
-
                                     </td>
                                 </tr>
                             @endforeach
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    {{ $medicos->links() }}
+                                </td>
+                            </tr>
                             <tr>
                             </tr>
                         </table>

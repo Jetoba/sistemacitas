@@ -22,7 +22,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        $permisos = Permission::paginate(9);
+        $permisos = Permission::paginate(10);
         return view('permisos.index', ['permisos'=>$permisos]);
     }
 

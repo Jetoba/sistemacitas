@@ -194,7 +194,7 @@ class UsersController extends Controller
     {
 
 
-        $medicos = User::role('Medico')->paginate();
+        $medicos = User::role('Medico')->paginate(10);
         return view('users.medicos', ['medicos' => $medicos]);
 
     }

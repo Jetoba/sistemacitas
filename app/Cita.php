@@ -19,6 +19,10 @@ class Cita extends Model
 
 
 
+    public function ScopePendiente($query){
+
+        return $query->where('status','=','pendiente');
+    }
     public function scopeId($query, $id){
 
 

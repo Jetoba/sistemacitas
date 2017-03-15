@@ -22,7 +22,7 @@ class MedicinasController extends Controller
      */
     public function index()
     {
-        $medicinas = Medicina::paginate(1);
+        $medicinas = Medicina::paginate(10);
         return view('medicinas.index', ['medicinas'=>$medicinas]);
     }
 

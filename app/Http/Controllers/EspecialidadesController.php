@@ -22,7 +22,7 @@ class EspecialidadesController extends Controller
      */
     public function index()
     {
-        $especialidades = Especialidad::paginate();
+        $especialidades = Especialidad::paginate(10);
         return view('especialidades.index', ['especialidades'=>$especialidades]);
     }
 
