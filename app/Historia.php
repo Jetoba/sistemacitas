@@ -29,16 +29,22 @@ class Historia extends Model
 
         return $this->belongsTo('App\Cita','cita_id');
     }
+
+    public function recipe(){
+
+        return $this->HasOne('App\Recipe');
+    }
+
     //especialidad
     public function especialidad(){
 
         return $this->belongsTo('App\Especialidad','especialidad_id');
     }
 
-    public function scopeId($query, $id){
+    public function scopePaciente($query, $id){
 
 
-        return $query->where('paciente_id','like','%$id%');
+        return $query->where('id','like','%$id%');
 
 
     }

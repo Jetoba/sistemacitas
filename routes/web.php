@@ -31,16 +31,26 @@ Route::get('/usuarios/{id}/permisos','UsersController@permisos');
 Route::put('/usuarios/{id}/asignarpermisos','UsersController@asignarPermisos');
 Route::get('/cita/{id}/citamedico', 'CitasController@mostrarcitas');
 Route::get('/historia/{id}/historiapaciente', 'HistoriasController@mostrarhistoria');
+Route::get('/historia/{id}/historiaglobal', 'HistoriasController@mostrarhistoriaglobal');
 
 Route::resource('/recipes', 'RecipesController');
-Route::get('/recipe/{id}/recipescita', 'RecipesController@recipescita');
+
+Route::get('/recipe/{id}/recipeshistoria', 'RecipesController@reciphistory');
+
+Route::get('/historia/{id}/recipedehistorial', 'RecipesController@recipedehistoria');
+
+
 Route::get('/recipe/{id}/asignar', 'RecipesController@asigne');
 Route::put('/recipe/{id}/asignarmedicina', 'RecipesController@asignarmedicina');
-Route::get('/recipe/{id}/medicinas', 'RecipesController@edit');
 
+
+
+
+Route::get('/recipe/{id}/medicinas', 'RecipesController@edit');
+Route::get('/recipe/{id}/create', 'RecipesController@create');
 
 Route::get('/historia/{id}/create', 'HistoriasController@create');
-Route::get('/recipe/{id}/create', 'RecipesController@create');
+
 Route::get('/medico/{id}/asignar', 'UsersController@asignar');
 Route::put('/medico/{id}/especializacion', 'userscontroller@asignarespecializacion');
 Route::resource('/medicinas', 'MedicinasController');

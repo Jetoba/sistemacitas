@@ -14,8 +14,8 @@ class AlterRecipesTable extends Migration
     public function up()
     {
         Schema::table('recipes', function (Blueprint $table) {
-            $table->unsignedInteger('cita_id');
-            $table->foreign('cita_id')->references('id')->on('citas')->delete('cascade');
+            $table->unsignedInteger('historia_id');
+            $table->foreign('historia_id')->references('id')->on('historias')->delete('cascade');
             $table->unsignedInteger('farmaceuta_id')->nullable();
             $table->foreign('farmaceuta_id')->references('id')->on('users')->delete('cascade');
 

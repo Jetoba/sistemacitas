@@ -56,7 +56,6 @@
                                         <tr>
                                             <th>Fecha</th>
                                             <th>Paciente</th>
-                                            <th>Estado</th>
                                             <th>Informe</th>
                                             <th colspan="4" width="10%">Acciones</th>
                                         </tr>
@@ -64,10 +63,9 @@
                                             <tr>
                                                 <td>{{$cite->fecha}}</td>
                                                 <td>{{$cite->paciente->nombre." ".$cite->paciente->apellido}}</td>
-                                                <td>{{$cite->status}}</td>
                                                 <td>{{$cite->observaciones}}</td>
                                                 <td>
-                                                    <a href="{{ url('/historia/'.$cite->paciente->id.'/historiapaciente')}}"
+                                                    <a href="{{ url('/historia/'.$cite->paciente_id.'/historiapaciente')}}"
                                                        class="btn btn-primary">
                                                         H
                                                     </a>
@@ -78,18 +76,7 @@
                                                         crear
                                                     </a>
                                                 </td>
-                                                <td>
-                                                    <a href="{{ url('/recipe/'.$cite->id.'/create')}}"
-                                                       class="btn btn-warning">
-                                                        CR
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a href="{{ url('/recipe/'.$cite->id.'/recipescita')}}"
-                                                       class="btn btn-warning">
-                                                        HR
-                                                    </a>
-                                                </td>
+
                                             </tr>
                                         @endforeach
                                         <tr>
@@ -107,7 +94,7 @@
                             <div class="row">
                                 <div class="panel-body">
                                     <a href="{{ url('/recipes/all')}}" class="btn btn-success">
-                                        <i class="fa fa-user"></i> Recipes
+                                        <span>Historial De recipes</span>
                                     </a>
                                     <table class="table table-bordered" style="margin-top: 1%;">
                                         <tr>
@@ -117,8 +104,8 @@
                                         </tr>
                                         @foreach($recipes as $recipe)
                                             <tr>
-                                                <td>{{$recipe->cita->medicox->nombre." ".$recipe->cita->medicox->apellido}}</td>
-                                                <td>{{$recipe->cita->paciente->nombre." ".$recipe->cita->paciente->apellido}}</td>
+                                                <td>{{$recipe->historia->medico->nombre." ".$recipe->historia->medico->apellido}}</td>
+                                                <td>{{$recipe->historia->paciente->nombre." ".$recipe->historia->paciente->apellido}}</td>
                                                 <td>
                                                     <a href="{{ url('/recipe/'.$recipe->id.'/medicinas')}}"
                                                        class="btn btn-primary">

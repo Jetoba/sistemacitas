@@ -23,5 +23,10 @@ class Medicina extends Model
     public function recipe(){
         return $this->belongsToMany('App\Recipe','recipe_has_medicinas','medicina_id','recipe_id');
     }
+    public function scopeNombre($query, $nombre)
+    {
+        return $query->where('nombre', 'like', '%'.$nombre.'%');
+    }
+
 
 }

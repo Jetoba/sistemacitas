@@ -159,7 +159,8 @@ class CitasController extends Controller
     public function miscitas(){
 
         $id = Auth::user()->id;
-        $citas= Cita::where('medico', $id)->where('status','=','Asignada')->get();
+        $citas= Cita::where('medico', $id)->where('status','=','Asignada');
+
 
         return view('doctores.home',['citas'=>$citas]);
 

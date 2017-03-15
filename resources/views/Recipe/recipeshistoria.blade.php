@@ -27,7 +27,6 @@
                                 <th>Fecha</th>
                                 <th>Medico</th>
                                 <th>Paciente</th>
-                                <th>Estado</th>
                                 <th width="10%" colspan="2">Acciones</th>
 
                             </tr>
@@ -36,9 +35,8 @@
                             @foreach($recipes as $recipe)
                                 <tr>
                                     <td>{{$recipe->created_at}}</td>
-                                    <td>{{$recipe->cita->medicox->nombre." ".$recipe->cita->medicox->apellido}}</td>
-                                    <td>{{$recipe->cita->paciente->nombre." ".$recipe->cita->paciente->apellido}}</td>
-                                    <td>{{$recipe->status}}</td>
+                                    <td>{{$recipe->historia->medico->nombre." ".$recipe->historia->medico->apellido}}</td>
+                                    <td>{{$recipe->historia->paciente->nombre." ".$recipe->historia->paciente->apellido}}</td>
                                     <td>
                                         <a href= "{{ url('/recipe/'.$recipe->id.'/asignar')}}" class="btn btn-primary">
                                             Medicinas
@@ -46,6 +44,7 @@
                                     </td>
                                 </tr>
                             @endforeach
+
                             <tr>
                                 <td colspan="7" class="text-center">
                                     {{ $recipes->links()}}

@@ -35,7 +35,7 @@
 
                                 <div class="col-md-6">
                                     <input type="text" name="paciente"  type="text" id="paciente" class="form-control"
-                                           value="{{$recipe->cita->paciente->nombre . " " . $recipe->cita->paciente->apellido }}" autofocus readonly >
+                                           value="{{$recipe->historia->paciente->nombre . " " . $recipe->historia->paciente->apellido }}" autofocus readonly >
 
 
                                     @if ($errors->has('paciente'))

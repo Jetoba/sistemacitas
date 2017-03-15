@@ -22,8 +22,15 @@ class MedicinasController extends Controller
      */
     public function index()
     {
-        $medicinas = Medicina::paginate(10);
-        return view('medicinas.index', ['medicinas'=>$medicinas]);
+
+        $users = null;
+        $buscar = \Request::get('buscar');
+        if($buscar!='')
+            $medicinas= Medicina::nombre($buscar)->paginate(10);
+        else
+            $medicinas = Medicina::paginate(10);
+        
+        return view('medicinas.index', ['medicinas'=>$medicinas, 'buscar'=>$buscar]);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cita;
+use App\Historia;
 use App\Medicina;
 use App\Recipe;
 use App\User;
@@ -31,9 +32,10 @@ class RecipesController extends Controller
      */
     public function create($id)
     {
-        $cita = Cita::findOrFail($id);
-        return view('recipe.create', ['cita'=>$cita]);
+        $historia = Historia::findOrFail($id);
+        return view('recipe.create', ['historia'=>$historia]);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -43,17 +45,12 @@ class RecipesController extends Controller
      */
     public function store(Request $request)
     {
-        $v = Validator::make($request->all(), [
-            'observaciones' => 'required|max:300',
-        ]);
-        if ($v->fails()) {
-            return redirect()->back()->withErrors($v)->withInput();
-        }
+
         try {
             \DB::beginTransaction();
             Recipe::create([
                 'observaciones' => $request->input('observaciones'),
-                'cita_id' => $request->input('cita_id'),
+                'historia_id' => $request->input('historia_id'),
             ]);
         } catch (\Exception $v) {
             \DB::rollback();
@@ -126,13 +123,16 @@ class RecipesController extends Controller
         //
     }
 
-    public function recipescita($id)
+    public function reciphistory($id)
+//        cambiar este id por historia // el de abajo
+        //
     {
-        $citas = Cita::findorFail($id);
-        $recipes= Recipe::where('cita_id', $id)->paginate(10);
-        return view('recipe.recipescita',['recipes'=>$recipes, 'citas'=>$citas]);
+        $historia = Historia::findorFail($id);
+        $recipes= Recipe::where('historia_id', $id)->paginate(10);
+        return view('recipe.recipeshistoria',['recipes'=>$recipes, 'historia'=>$historia]);
 
     }
+
 
     public function asigne($id)
     {
@@ -147,6 +147,15 @@ class RecipesController extends Controller
         $recipe = Recipe::findOrFail($id);
         $recipe->medicina()->attach($request->input('medicinas'));
         return redirect('/home')->with('mensaje', 'Medicinas agregadas al recipe Satisfactoriamente');
+    }
+
+    public function recipedehistoria($id)
+    {
+
+        $recipes= Recipe::where('historia_id', $id)->paginate(10);
+        return view('recipe.recipedehistoria',['recipes'=>$recipes]);
+
+
     }
 
 }

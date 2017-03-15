@@ -20,22 +20,12 @@ class Cita extends Model
 
 
     public function ScopePendiente($query){
-
         return $query->where('status','=','pendiente');
     }
-    public function scopeId($query, $id){
 
-
-        return $query->where('medico_id','like','%$id%');
-
-
-    }
 
     public function especialidad(){
-
-
         return $this->belongsTo('App\Especialidad','especialidad_id');
-
     }
 
     public function medicox(){

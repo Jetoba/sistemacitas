@@ -27,39 +27,30 @@
                                 <th>Fecha</th>
                                 <th>Especialidad</th>
                                 <th>Medico</th>
-                                <th>Informe</th>
-                                <th colspan="3" width="10%">Acciones</th>
+                                <th width="10%">Recipe</th>
+
+
+
                             </tr>
-                            @foreach($historia as $historia)
+                            @foreach($historias as $historia)
                                 <tr>
                                     <td>{{ $historia->created_at }}</td>
                                     <td>{{ $historia->especialidad->nombre }}</td>
-                                    <td>{{ $historia->medico->nombre . " " . $historia->medico->apellido   }}
-                                    <td>{{ $historia->informe}}</td>
+                                    <td>{{ $historia->medico->nombre . " " . $historia->medico->apellido}}</td>
                                     <td>
-                                        <a href="{{ url('/recipe/'.$historia->id.'/create')}}"
-                                           class="btn btn-warning">
-                                            CR
+                                        <a href= "{{ url('/historia/'.$historia->id.'/recipedehistorial')}}" class="btn btn-primary">
+                                            Recipe
                                         </a>
                                     </td>
-                                    <td>
-                                        <a href="{{ url('/recipe/'.$historia->id.'/recipeshistoria')}}"
-                                           class="btn btn-warning">
-                                            HR
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ url('/historia/'.$historia->cita->paciente->id.'/historiaglobal')}}"
-                                           class="btn btn-primary">
-                                            H
-                                        </a>
-                                    </td>
+
                                 </tr>
                             @endforeach
-
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    {{$historias->links() }}
+                                </td>
+                            </tr>
                         </table>
-
-
                     </div>
                 </div>
             </div>

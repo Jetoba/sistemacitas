@@ -47,4 +47,18 @@ class User extends Authenticatable
         return $this->hasOne('App\Recipe');
     }
 
+    public function scopeNombre($query, $nombre)
+    {
+        return $query->where('nombre', 'like', '%'.$nombre.'%');
+    }
+    public function scopeApellido($query, $apellido)
+    {
+        return $query->orWhere('apellido', 'like', '%'.$apellido.'%');
+    }
+    public function scopeCedula($query, $cedula)
+    {
+        return $query->orWhere('cedula', 'like', '%'.$cedula.'%');
+    }
+
+
 }

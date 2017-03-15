@@ -26,9 +26,20 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
-        $roles = Role::all();
-        return view('users.index', ['users' => $users, 'roles' => $roles]);
+
+        $users = null;
+        $buscar = \Request::get('buscar');
+        if($buscar!='')
+            $users= User::nombre($buscar)
+                ->apellido($buscar)
+                ->cedula($buscar)
+                ->paginate(10);
+        else
+            $users = User::latest()->paginate(10);
+            $roles = Role::all();
+        return view('users.index', ['users' =>$users, 'buscar'=>$buscar, 'roles' => $roles]);
+
+
     }
 
     /**
@@ -193,10 +204,8 @@ class UsersController extends Controller
     public function medicosindex()
     {
 
-
-        $medicos = User::role('Medico')->paginate(10);
+        $medicos = User::role('Medico')->latest()->paginate(10);
         return view('users.medicos', ['medicos' => $medicos]);
-
     }
 
     public function asignar($id)

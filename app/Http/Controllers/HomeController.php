@@ -28,10 +28,15 @@ class HomeController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
+//      FARMACEUTA
         $recipes = Recipe::status()->paginate(10);
-        $citas= Cita::where('paciente_id', $id)->paginate(10);
-        $cites= Cita::where('medico_id', $id)->paginate(10);
+//      CITAS DEL PACIENTE
+        $citas= Cita::where('paciente_id', $id)->latest()->paginate(10);
+//      CITAS DEL MEDICO
+        $cites= Cita::where('medico_id', $id)->where('status','=', 'Vista')->paginate(10);
         return view('home',['citas'=>$citas, 'cites'=>$cites, 'recipes'=>$recipes]);
     }
+
+
 
 }

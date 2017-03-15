@@ -3,30 +3,25 @@
 @section('content')
     <div class="container">
         @if(session('mensaje'))
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-info alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Info:</strong> {{ session('mensaje') }}.
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-info alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <strong>Info:</strong> {{ session('mensaje') }}.
+                    </div>
                 </div>
             </div>
-        </div>
         @endif
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Permisos</div>
-
                     <div class="panel-body">
                         Listado de Permisos
-
-
                         <a href="{{ url('/permisos/create') }}" class="btn btn-success">
                             <i class="fa fa-user"></i> Permiso Nuevo
                         </a>
-
-
-
                         <table class="table table-bordered">
                             <tr>
                                 <th>Nombre</th>

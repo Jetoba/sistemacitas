@@ -18,37 +18,53 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Medicinas despachadas</div>
                     <div class="panel-body">
+                        {{--<div class="row">--}}
+                        {{--<div class="col-lg-6">--}}
+                            {{--<form action="{{ url('/recipes') }}" method="get">--}}
+                                {{--<div class="input-group">--}}
+                                    {{--<input type="text" name="buscar" id="buscar" class="form-control"--}}
+                                           {{--placeholder="Inserte nombre, apellido, fecha o farmaceuta ..."--}}
+                                           {{--value="">--}}
+                                    {{--<span class="input-group-btn">--}}
+                                        {{--<button class="btn btn-default" type="submit">--}}
+                                            {{--<i class="fa fa-search"></i></button>--}}
+                                    {{--</span>--}}
+                                {{--</div>--}}
+                            {{--</form>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                         <div class="row">
                             <div class="panel-body">
                                 <table class="table table-bordered" style="margin-top: 1%;">
                                     <tr>
-                                        <th width="10%" >Medicinas</th>
+                                        <th></th>
                                         <th>Despachado el</th>
                                         <th>Por</th>
                                         <th> Al Paciente</th>
                                         <th>Cedula</th>
                                     </tr>
-                                    @foreach($recipes as $recipe)
+                                    @foreach($recipes as $recipe )
                                         <tr>
-                                            <td>
-                                                <button class="btn btn-danger"
-                                                        data-action=""
-                                                        data-name="{{$recipe->id}}"
-                                                        data-toggle="modal" data-target="#confirm-delete">
-                                                    <i class="">Medicinas</i>
-                                                </button>
-                                            </td>
+                                            <td></td>
                                             <td>{{$recipe->updated_at}}</td>
                                             <td>{{$recipe->farmaceuta->nombre." ".$recipe->farmaceuta->apellido}}</td>
-                                            <td>{{$recipe->cita->paciente->nombre." ".$recipe->cita->paciente->apellido}}</td>
-                                            <td>{{$recipe->cita->paciente->cedula}}</td>
+                                            <td>{{$recipe->historia->paciente->nombre." ".$recipe->historia->paciente->apellido}}</td>
+                                            <td>{{$recipe->historia->paciente->cedula}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Medicinas</strong></td>
 
+                                            <td colspan="4">
+                                                @foreach($recipe->medicina as $medicina )
+                                                 {{$medicina->nombre .", "}}
+                                                @endforeach
+                                            </td>
                                         </tr>
                                     @endforeach
                                     <tr>
-                                        <td colspan="5" class="text-center">
-                                            {{ $recipes->links() }}
-                                        </td>
+                                    <td colspan="5" class="text-center">
+                                     {{$recipes->links()}}
+                                    </td>
                                     </tr>
                                 </table>
                             </div>

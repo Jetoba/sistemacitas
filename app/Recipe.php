@@ -12,7 +12,7 @@ class Recipe extends Model
 
     protected $fillable = [
 
-        'observaciones', 'cita_id', 'status', 'farmaceuta_id'
+        'observaciones', 'historia_id', 'status', 'farmaceuta_id'
        ];
 
 
@@ -22,11 +22,13 @@ class Recipe extends Model
         return $this->belongsToMany('App\Medicina','recipe_has_medicinas','recipe_id','medicina_id');
     }
 
-    public function cita(){
+
+    public function historia(){
 
 
-        return $this->belongsTo('App\Cita','cita_id');
+        return $this->belongsTo('App\Historia','historia_id');
     }
+
 
     public function farmaceuta(){
 
@@ -50,6 +52,18 @@ class Recipe extends Model
 
         return $query->where('cita_id','like','%$id%');
 
+    }
 
+    public function scopeNombre($query, $nombre)
+    {
+        return $query->where('nombre', 'like', '%'.$nombre.'%');
+    }
+    public function scopeApellido($query, $apellido)
+    {
+        return $query->orWhere('apellido', 'like', '%'.$apellido.'%');
+    }
+    public function scopeCedula($query, $cedula)
+    {
+        return $query->orWhere('cedula', 'like', '%'.$cedula.'%');
     }
 }
