@@ -17,7 +17,9 @@ class AlterRecipesTable extends Migration
             $table->unsignedInteger('cita_id');
             $table->foreign('cita_id')->references('id')->on('citas')->delete('cascade');
             $table->unsignedInteger('farmaceuta_id')->nullable();
-            $table->foreign('farmaceuta_id')->references('id')->on('citas')->delete('cascade');
+            $table->foreign('farmaceuta_id')->references('id')->on('users')->delete('cascade');
+
+
         });
     }
 

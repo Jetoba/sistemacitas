@@ -40,6 +40,10 @@ class Recipe extends Model
 
         return $query->where('status','=','Asignado');
     }
+    public function ScopeDespachados($query){
+
+        return $query->where('status','=','Despachado');
+    }
 
     public function scopeId($query, $id){
 

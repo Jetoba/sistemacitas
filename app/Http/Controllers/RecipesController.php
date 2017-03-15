@@ -7,6 +7,7 @@ use App\Medicina;
 use App\Recipe;
 use App\User;
 use Validator;
+use Auth;
 use Illuminate\Http\Request;
 
 class RecipesController extends Controller
@@ -18,7 +19,9 @@ class RecipesController extends Controller
      */
     public function index()
     {
-        //
+        $recipes = Recipe::despachados()->paginate(10);
+        return view ('recipe.index',['recipes' => $recipes]);
+
     }
 
     /**
@@ -42,21 +45,16 @@ class RecipesController extends Controller
     {
         $v = Validator::make($request->all(), [
             'observaciones' => 'required|max:300',
-
         ]);
-
         if ($v->fails()) {
             return redirect()->back()->withErrors($v)->withInput();
         }
         try {
             \DB::beginTransaction();
-
-           Recipe::create([
+            Recipe::create([
                 'observaciones' => $request->input('observaciones'),
                 'cita_id' => $request->input('cita_id'),
-
             ]);
-
         } catch (\Exception $v) {
             \DB::rollback();
         } finally {
@@ -86,7 +84,8 @@ class RecipesController extends Controller
     {
         $recipe = Recipe::findOrFail($id);
         $medicinas= Medicina::all();
-        return view('Recipe.edit', ['recipe'=>$recipe, 'medicina'=>$medicinas]);
+        $farmaceuta= Auth::user();
+        return view('Recipe.edit', ['recipe'=>$recipe, 'medicina'=>$medicinas, 'farmaceuta'=>$farmaceuta]);
     }
 
     /**
@@ -98,7 +97,22 @@ class RecipesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            \DB::beginTransaction();
+
+            $recipe = Recipe::findOrFail($id);
+            $recipe->update([
+                'fecha' => $request->input('fecha'),
+                'farmaceuta_id' => $request->input('farmaceuta'),
+                'status' => $request->input('status'),
+            ]);
+        } catch (\Exception $e) {
+            \DB::rollback();
+        } finally {
+            \DB::commit();
+        }
+        return redirect('/home')->with('mensaje', 'Recipe despachado exitosamente');
+
     }
 
     /**

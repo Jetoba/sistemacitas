@@ -12,10 +12,6 @@
                             {{ method_field('POST') }}
                             {{ csrf_field() }}
 
-                            <div class="panel-body">
-                                <form class="form-horizontal" role="form" method="POST" action="{{url('/recipes')}}">
-                                    {{ method_field('POST') }}
-                                    {{ csrf_field() }}
 
 
                                     <div class="form-group{{ $errors->has('cita_id') ? ' has-error' : '' }}">

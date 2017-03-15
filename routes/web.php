@@ -22,6 +22,10 @@ Route::resource('/cita', 'CitasController');
 Route::resource('/usuarios', 'UsersController');
 Route::resource('/roles', 'RolesController');
 Route::resource('/users', 'UsersController');
+Route::resource('/recipe', 'RecipesController');
+Route::get('/recipes/all', 'RecipesController@index');
+
+
 Route::resource('/historias', 'HistoriasController@store');
 Route::get('/usuarios/{id}/permisos','UsersController@permisos');
 Route::put('/usuarios/{id}/asignarpermisos','UsersController@asignarPermisos');
