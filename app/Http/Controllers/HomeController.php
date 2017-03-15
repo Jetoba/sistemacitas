@@ -33,7 +33,7 @@ class HomeController extends Controller
 //      CITAS DEL PACIENTE
         $citas= Cita::where('paciente_id', $id)->latest()->paginate(10);
 //      CITAS DEL MEDICO
-        $cites= Cita::where('medico_id', $id)->where('status','=', 'Vista')->paginate(10);
+        $cites= Cita::where('medico_id', $id)->where('status','=', 'Viendose')->paginate(10);
         return view('home',['citas'=>$citas, 'cites'=>$cites, 'recipes'=>$recipes]);
     }
 

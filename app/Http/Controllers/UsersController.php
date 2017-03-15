@@ -249,5 +249,23 @@ class UsersController extends Controller
         return redirect('/usuarios')->with('mensaje', 'Permisos Asignados Satisfactoriamente');
     }
 
+    public function pacientesindex()
+    {
+
+        $pacientes = null;
+        $buscar = \Request::get('buscar');
+        if ($buscar != '')
+            $pacientes = User::role('Paciente')
+                ->nombre($buscar)
+                ->apellido($buscar)
+                ->cedula($buscar)
+                ->paginate();
+        else
+            $pacientes = User::role('Paciente')->latest()->paginate(10);
+        return view('users.Pacientes', ['pacientes' => $pacientes, 'buscar' => $buscar]);
+    }
+
+
+
 
 }

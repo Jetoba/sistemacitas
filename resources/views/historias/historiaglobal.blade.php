@@ -24,9 +24,10 @@
                     <div class="panel-body">
                         <table class="table table-bordered">
                             <tr>
-                                <th>Fecha</th>
+                                <th width="20%">Fecha</th>
                                 <th>Especialidad</th>
                                 <th>Medico</th>
+                                <th>Informe</th>
                                 <th width="10%">Recipe</th>
 
 
@@ -37,6 +38,7 @@
                                     <td>{{ $historia->created_at }}</td>
                                     <td>{{ $historia->especialidad->nombre }}</td>
                                     <td>{{ $historia->medico->nombre . " " . $historia->medico->apellido}}</td>
+                                    <td>{{ $historia->informe}}</td>
                                     <td>
                                         <a href= "{{ url('/historia/'.$historia->id.'/recipedehistorial')}}" class="btn btn-primary">
                                             Recipe

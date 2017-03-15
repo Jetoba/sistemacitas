@@ -59,7 +59,7 @@
                             <li><a href="{{ url('/permisos') }}">Permisos</a></li>
                             <li><a href="{{ url('/medicinas') }}">Medicinas</a></li>
                             <li><a href="{{ url('/especialidades') }}">Especialidades</a></li>
-
+                            <li><a href="{{ url('/Pacientes') }}">Pacientes</a></li>
                             <li><a href="{{ url('/cita') }}">Citas</a></li>
                             <li><a href="{{ url('/home') }}">Inicio</a></li>
                             <li class="dropdown">

@@ -80,6 +80,7 @@
                                    <select name="status" id="status" class="form-control" >
                                         <option value="pendiente">pendiente</option>
                                         <option value="Asignada">Asignada</option>
+                                       <option value="Viendose">Viendose</option>
                                         <option value="vista">Vista</option>
                                     </select>
                                     @if ($errors->has('status'))
