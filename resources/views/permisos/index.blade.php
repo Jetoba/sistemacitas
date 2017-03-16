@@ -18,10 +18,13 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Permisos</div>
                     <div class="panel-body">
+
                         Listado de Permisos
+                        @if(Auth::user()->roles[0]->hasPermissionTo('ModuloPermisos') or Auth::user()->can('ModuloPermisos'))
                         <a href="{{ url('/permisos/create') }}" class="btn btn-success">
                             <i class="fa fa-user"></i> Permiso Nuevo
                         </a>
+                        @endif
                         <table class="table table-bordered">
                             <tr>
                                 <th>Nombre</th>
@@ -30,11 +33,14 @@
                             @foreach($permisos as $permiso)
                                 <tr>
                                     <td>{{ $permiso->name }}</td>
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('EditarPermiso') or Auth::user()->can('EditarPermiso'))
                                     <td>
                                         <a href="{{ url('/permisos/'.$permiso->id.'/edit') }}" class="btn btn-primary">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
+                                    @endif
+                                        @if(Auth::user()->roles[0]->hasPermissionTo('EliminarPermiso') or Auth::user()->can('EliminarPermiso'))
                                     <td>
                                         <button class="btn btn-danger"
                                                 data-action="{{ url('/permisos/'.$permiso->id) }}"
@@ -43,6 +49,7 @@
                                             <i class="fa fa-trash fa-1x"></i>
                                         </button>
                                     </td>
+                                            @endif
                                 </tr>
                             @endforeach
                             <tr>

@@ -37,11 +37,15 @@
                                     <td>{{$recipe->created_at}}</td>
                                     <td>{{$recipe->historia->medico->nombre." ".$recipe->historia->medico->apellido}}</td>
                                     <td>{{$recipe->historia->paciente->nombre." ".$recipe->historia->paciente->apellido}}</td>
+
+
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('AsignarMedicina') or Auth::user()->can('AsignarMedicina'))
                                     <td>
                                         <a href= "{{ url('/recipe/'.$recipe->id.'/asignar')}}" class="btn btn-primary">
                                             Medicinas
                                         </a>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
 

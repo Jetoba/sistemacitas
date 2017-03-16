@@ -21,9 +21,12 @@
                         <div class="row">
                             <div class="col-md-6">
                             Listado de Usuarios
+                                @if(Auth::user()->roles[0]->hasPermissionTo('AgregarUsuarios') or Auth::user()->can('AgregarUsuarios'))
+
                             <a href="{{ url('/users/create') }}" class="btn btn-success">
                                 <i class="fa fa-user"></i> Agregar Usuario
                             </a>
+                                @endif
                             </div>
                             <div class="col-lg-6">
                                 <form action="{{ url('/usuarios') }}" method="get">
@@ -54,17 +57,25 @@
                                 <td>{{ $user->cedula }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->roles[0]->name }}</td>
+                                @if(Auth::user()->roles[0]->hasPermissionTo('PermisosUsuarios') or Auth::user()->can('PermisosUsuarios'))
+
                                 <td>
                                     <a href="{{ url('usuarios/'.$user->id.'/permisos') }}" class="btn btn-warning">
                                         <i class="fa fa-id-card"></i>
                                     </a>
                                 </td>
+
+                                @endif
+                                @if(Auth::user()->roles[0]->hasPermissionTo('EditarUsuarios') or Auth::user()->can('EditarUsuarios'))
                                 <td>
                                     <a href="{{ url('usuarios/'.$user->id.'/edit') }}" class="btn btn-primary">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </td>
+                                @endif
+                                @if(Auth::user()->roles[0]->hasPermissionTo('EliminarUsuarios') or Auth::user()->can('EliminarUsuarios'))
                                 <td>
+
                                     <button class="btn btn-danger"
                                             data-action="{{ url('/usuarios/'.$user->id) }}"
                                             data-name="{{ $user->name }}"
@@ -72,6 +83,7 @@
                                         <i class="fa fa-trash fa-1x"></i>
                                     </button>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                         <tr>

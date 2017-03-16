@@ -27,18 +27,20 @@
                                     @endif
                                 </div>
                             </div>
-
-
                     </div>
                 </div>
 
                 <div class="form-group">
+                    @if(Auth::user()->roles[0]->hasPermissionTo('EditarRole') or Auth::user()->can('EditarRole'))
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
                             Guardar
                         </button>
                     </div>
+                        @endif
                 </div>
+
+
                 </form>
             </div>
         </div>

@@ -15,7 +15,7 @@
 
                             {{--Paciente Id usuario--}}
                             <div class="form-group{{ $errors->has('paciente_id') ? ' has-error' : '' }}">
-                                <label for="paciente_id" class="col-md-4 control-label">Id Paciente</label>
+                                <label for="paciente_id" class="col-md-4 control-label">No Paciete</label>
 
                                 <div class="col-md-6">
                                     <input id="paciente_id" type="text" class="form-control" name="paciente_id" value="{{Auth::user()->id}}" readonly>

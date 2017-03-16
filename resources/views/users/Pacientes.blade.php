@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="alert alert-info alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
+                                        aria-hidden="true">&times;</span></button>
                         <strong>Info:</strong> {{ session('mensaje') }}.
                     </div>
                 </div>
@@ -48,12 +48,14 @@
                                     <td>{{ $paciente->nombre }}</td>
                                     <td>{{ $paciente->apellido }}</td>
                                     <td>{{ $paciente->cedula }}</td>
-                                    <td>{{ $paciente->edad }}</td>
+                                    <td>{{ $paciente->edad }}
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('PacientesHistoria') or Auth::user()->can('PacientesHistoria'))
                                     <td>
                                         <a href="{{ url('/historia/'.$paciente->id.'/historiaglobal')}}" class="btn btn-primary">
                                             Historial
                                         </a>
                                     </td>
+                                        @endif
                                 </tr>
                             @endforeach
                             <tr>

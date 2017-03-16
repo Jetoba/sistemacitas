@@ -24,7 +24,7 @@
                     <div class="panel-body">
                         <table class="table table-bordered">
                             <tr>
-                                <th>Fecha</th>
+
                                 <th>Especialidad</th>
                                 <th>Medico</th>
                                 <th>Informe</th>
@@ -32,28 +32,33 @@
                             </tr>
                             @foreach($historia as $historia)
                                 <tr>
-                                    <td>{{ $historia->created_at }}</td>
                                     <td>{{ $historia->especialidad->nombre }}</td>
                                     <td>{{ $historia->medico->nombre . " " . $historia->medico->apellido   }}
                                     <td>{{ $historia->informe}}</td>
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('CrearRecipe') or Auth::user()->can('CrearRecipe'))
                                     <td>
                                         <a href="{{ url('/recipe/'.$historia->id.'/create')}}"
                                            class="btn btn-warning">
-                                            CR
+                                            Crear Recipe
                                         </a>
                                     </td>
+                                    @endif
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('RecipeLocal') or Auth::user()->can('RecipeLocal'))
                                     <td>
                                         <a href="{{ url('/recipe/'.$historia->id.'/recipeshistoria')}}"
                                            class="btn btn-warning">
-                                            HR
+                                            Recipe
                                         </a>
                                     </td>
+                                    @endif
+                                        @if(Auth::user()->roles[0]->hasPermissionTo('HistorialGlobal') or Auth::user()->can('HistorialGlobal'))
                                     <td>
                                         <a href="{{ url('/historia/'.$historia->cita->paciente->id.'/historiaglobal')}}"
                                            class="btn btn-primary">
-                                            H
+                                            Historia
                                         </a>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
 

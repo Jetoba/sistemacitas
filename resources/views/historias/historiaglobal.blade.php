@@ -39,12 +39,13 @@
                                     <td>{{ $historia->especialidad->nombre }}</td>
                                     <td>{{ $historia->medico->nombre . " " . $historia->medico->apellido}}</td>
                                     <td>{{ $historia->informe}}</td>
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('RecipeGlobal') or Auth::user()->can('RecipeGlobal'))
                                     <td>
                                         <a href= "{{ url('/historia/'.$historia->id.'/recipedehistorial')}}" class="btn btn-primary">
                                             Recipe
                                         </a>
                                     </td>
-
+                                    @endif
                                 </tr>
                             @endforeach
                             <tr>

@@ -19,10 +19,11 @@
 
                     <div class="panel-body">
                         Listado de Especialidades
-
+                        @if(Auth::user()->roles[0]->hasPermissionTo('ModuloEspecialidades') or Auth::user()->can('ModuloEspecialidades'))
                         <a href="{{ url('/especialidades/create') }}" class="btn btn-success">
                             <i class="fa fa-user"></i> Agregar Especialidad
                         </a>
+                        @endif
 
                         <table class="table table-bordered">
                             <tr>
@@ -32,11 +33,14 @@
                             @foreach($especialidades as $especialidad)
                                 <tr>
                                     <td>{{ $especialidad->nombre }}</td>
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('EditarEspecialidades') or Auth::user()->can('EditarEspecialidades'))
                                     <td>
                                         <a href="{{ url('especialidades/'.$especialidad->id.'/edit') }}" class="btn btn-primary">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
+                                    @endif
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('EliminarEspecialidades') or Auth::user()->can('EliminarEspecialidades'))
                                     <td>
                                         <button class="btn btn-danger"
                                                 data-action="{{ url('/especialidades/'.$especialidad->id) }}"
@@ -45,6 +49,7 @@
                                             <i class="fa fa-trash fa-1x"></i>
                                         </button>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             <tr>

@@ -28,9 +28,15 @@ class EspecialidadesUsersTableSeeder extends Seeder
             'usuario_id'=>4,
             'especialidad_id'=>2,
         ]);
+
         DB::table('especialidades_users')->insert([
             'usuario_id'=>5,
             'especialidad_id'=>4,
+        ]);
+
+        DB::table('especialidades_users')->insert([
+            'usuario_id'=>6,
+            'especialidad_id'=>1,
         ]);
 
     }

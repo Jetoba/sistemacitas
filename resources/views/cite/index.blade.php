@@ -18,7 +18,9 @@
                     <div class="panel-heading" >Listado de Citas</div>
                     <div class="panel-body">
                         <a href="{{url('/medicos')}}" class="btn btn-success">
+                            @if(Auth::user()->roles[0]->hasPermissionTo('ModuloCitasdeMedico') or Auth::user()->can('EditarCita'))
                             <i class="fa fa-user"></i> Medicos</a>
+                        @endif
                         <table class="table table-bordered" style=" margin-top: 1%;">
                             <tr>
                                 <th>Fecha</th>
@@ -35,10 +37,15 @@
                                     <td>{{$cita->especialidad->nombre}}</td>
                                     <td>{{$cita->paciente->nombre . " ". $cita->paciente->apellido}}</td>
                                     <td>{{$cita->status}}</td>
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('EditarCita') or Auth::user()->can('EditarCita'))
                                     <td>
+
                                         <a href="{{url('/cita/'.$cita->id.'/edit')}}" class="btn btn-primary">
-                                            <i class="fa fa-edit"></i>
+                                           Asignar
                                         </a>
+                                    </td>
+                                    @endif
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('EliminarCita') or Auth::user()->can('EliminarCita'))
                                     <td>
                                         <button class="btn btn-danger"
                                                data-action="{{ url('/cita/'.$cita->id) }}"
@@ -46,7 +53,7 @@
                                                 data-toggle="modal" data-target="#confirm-delete">
                                             <i class="fa fa-trash fa-1x"></i>
                                         </button>
-                                    </td>
+                                    @endif
                                     </td>
                                 </tr>
                             @endforeach

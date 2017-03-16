@@ -21,9 +21,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 Listado de Medicinas
+
+                                @if(Auth::user()->roles[0]->hasPermissionTo('ModuloMedicina') or Auth::user()->can('ModuloMedicina'))
                                 <a href="{{ url('/medicinas/create') }}" class="btn btn-success">
                                     <i class="fa fa-user"></i> Agregar Usuario
                                 </a>
+                                @endif
                             </div>
                             <div class="col-lg-6">
                                 <form action="{{ url('/medicinas') }}" method="get">
@@ -48,12 +51,17 @@
                         @foreach($medicinas as $medicina)
                             <tr>
                                 <td>{{ $medicina->nombre }}</td>
+
+                                @if(Auth::user()->roles[0]->hasPermissionTo('EditarMedicina') or Auth::user()->can('EditarMedicina'))
                                 <td>
                                     <a href="{{ url('medicinas/'.$medicina->id.'/edit') }}" class="btn btn-primary">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </td>
+                                @endif
+                                @if(Auth::user()->roles[0]->hasPermissionTo('EliminarMedicina') or Auth::user()->can('EliminarMedicina'))
                                 <td>
+
                                     <button class="btn btn-danger"
                                             data-action="{{ url('/medicinas/'.$medicina->id) }}"
                                             data-name="{{ $medicina->nombre }}"
@@ -61,6 +69,7 @@
                                         <i class="fa fa-trash fa-1x"></i>
                                     </button>
                                 </td>
+                                    @endif
                             </tr>
                         @endforeach
                         <tr>

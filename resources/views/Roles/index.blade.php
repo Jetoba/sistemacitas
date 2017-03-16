@@ -21,8 +21,10 @@
                         Listado de roles
 
 
+                        @if(Auth::user()->roles[0]->hasPermissionTo('NuevoRole') or Auth::user()->can('NuevoRole'))
                         <a href="{{ url('/roles/create') }}" class="btn btn-success">
                             <i class="fa fa-user"></i> Nuevo Role
+                            @endif
                         </a>
 
 
@@ -34,16 +36,22 @@
                             @foreach($roles as $role)
                                 <tr>
                                     <td>{{ $role->name }}</td>
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('PermisoRole') or Auth::user()->can('PermisoRole'))
                                     <td>
+
                                         <a href="{{ url('roles/'.$role->id.'/permisos') }}" class="btn btn-warning">
                                             <i class="fa fa-id-card"></i>
                                         </a>
                                     </td>
+                                    @endif
+                                        @if(Auth::user()->roles[0]->hasPermissionTo('EditarRole') or Auth::user()->can('EditarRole'))
                                     <td>
                                         <a href="{{ url('roles/'.$role->id.'/edit') }}" class="btn btn-primary">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
+                                        @endif
+                                            @if(Auth::user()->roles[0]->hasPermissionTo('EliminarRole') or Auth::user()->can('EliminarRole'))
                                     <td>
 
                                         <button class="btn btn-danger"
@@ -53,6 +61,7 @@
                                             <i class="fa fa-trash fa-1x"></i>
                                         </button>
                                     </td>
+                                                @endif
                                 </tr>
                             @endforeach
                             <tr>

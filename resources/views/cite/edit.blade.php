@@ -56,6 +56,8 @@
                                         <span class="help-block">
                                         <strong>{{ $errors->first('especialidades') }}</strong>
                                     </span>
+
+
                                     @endif
                                 </div>
                             </div>
@@ -90,6 +92,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @if(Auth::user()->roles[0]->hasPermissionTo('EditarCita') or Auth::user()->can('EditarCita'))
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
@@ -97,6 +100,7 @@
                                     </button>
                                 </div>
                             </div>
+                            @endif
                         </form>
                     </div>
 

@@ -32,11 +32,13 @@
                                     <td>{{$cita->paciente->nombre." ".$cita->paciente->apellido}}</td>
                                     <td>{{$cita->observaciones}}</td>
                                     <td>{{$cita->status}}</td>
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('EditarCita') or Auth::user()->can('EditarCita'))
                                     <td>
                                         <a href="{{url('/cita/'.$cita->id.'/edit')}}" class="btn btn-primary">
-                                            <i class="fa fa-edit"></i>
+                                           Cambiar Estado
                                         </a>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             <tr>

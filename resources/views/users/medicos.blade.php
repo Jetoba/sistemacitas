@@ -32,17 +32,20 @@
                                     <td>{{ $medico->apellido }}</td>
                                     <td>{{ $medico->cedula }}</td>
                                     <td>{{ @$medico->especialidad[0]->nombre}}</td>
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('VerCitasDeMedico') or Auth::user()->can('VerCitasDeMedico'))
                                     <td>
                                         <a href="{{url('/cita/'.$medico->id.'/citamedico')}}" class="btn btn-primary">
                                             Citas
                                         </a>
                                     </td>
+                                    @endif
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('specialidadMedico') or Auth::user()->can('specialidadMedico'))
                                     <td>
                                         <a href="{{ url('medico/'.$medico->id.'/asignar') }}" class="btn btn-warning">
-                                            <i class="fa fa-id-card"></i>
+                                            Especialidad
                                         </a>
                                     </td>
-                                    </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             <tr>

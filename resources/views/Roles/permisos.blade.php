@@ -30,6 +30,7 @@
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-4 control-label">Permisos</label>
 
+                                @if(Auth::user()->roles[0]->hasPermissionTo('PermisoRole') or Auth::user()->can('PermisoRole'))
                                 <div class="col-md-6">
                                     @foreach($permisos as $permiso)
                                         <label class="checkbox-inline">
@@ -51,6 +52,7 @@
                                     </span>
                                     @endif
                                 </div>
+                                    @endif
                             </div>
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">

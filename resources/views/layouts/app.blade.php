@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Vitalyc</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -37,7 +37,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                       Vitalyc
                     </a>
                 </div>
 
@@ -54,13 +54,28 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
+                            @if(Auth::user()->roles[0]->hasPermissionTo('ModuloRoles') or Auth::user()->can('ModuloRoles'))
                             <li><a href="{{ url('/usuarios') }}">Usuarios</a></li>
+                            @endif
+                                @if(Auth::user()->roles[0]->hasPermissionTo('ModuloRoles') or Auth::user()->can('ModuloRoles'))
                             <li><a href="{{ url('/roles') }}">Roles</a></li>
+                                @endif
+                                @if(Auth::user()->roles[0]->hasPermissionTo('ModuloPermisos') or Auth::user()->can('ModuloPermisos'))
                             <li><a href="{{ url('/permisos') }}">Permisos</a></li>
+                                @endif
+                                @if(Auth::user()->roles[0]->hasPermissionTo('ModuloMedicina') or Auth::user()->can('ModuloMedicina'))
                             <li><a href="{{ url('/medicinas') }}">Medicinas</a></li>
+                                @endif
+                                @if(Auth::user()->roles[0]->hasPermissionTo('ModuloEspecialidades') or Auth::user()->can('ModuloEspecialidades'))
                             <li><a href="{{ url('/especialidades') }}">Especialidades</a></li>
+                                @endif
+                                @if(Auth::user()->roles[0]->hasPermissionTo('ModuloPacientes') or Auth::user()->can('ModuloPacientes'))
                             <li><a href="{{ url('/Pacientes') }}">Pacientes</a></li>
+                                @endif
+                                @if(Auth::user()->roles[0]->hasPermissionTo('ModuloSecretaria') or Auth::user()->can('ModuloSecretaria'))
                             <li><a href="{{ url('/cita') }}">Citas</a></li>
+                                    @endif
+
                             <li><a href="{{ url('/home') }}">Inicio</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
