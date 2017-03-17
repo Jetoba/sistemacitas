@@ -22,8 +22,8 @@ class EspecialidadesController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('ModuloEspecialidades'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('ModuloEspecialidades'))
+            abort(403);
 
         $especialidades = Especialidad::paginate(10);
         return view('especialidades.index', ['especialidades'=>$especialidades]);
@@ -36,8 +36,9 @@ class EspecialidadesController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('CrearEspecialidad'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('CrearEspecialidad'))
+            abort(403);
+
         return view ('especialidades.create');
     }
 
@@ -92,8 +93,8 @@ class EspecialidadesController extends Controller
      */
     public function edit($id)
     {
-        if (!Auth::user()->can('EditarEspecialidades'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('EditarEspecialidades'))
+            abort(403);
 
         $especialidad = Especialidad::findOrFail($id);
         return view('especialidades.edit', ['especialidad'=>$especialidad]);
@@ -139,8 +140,9 @@ class EspecialidadesController extends Controller
      */
     public function destroy($id)
     {
-        if (!Auth::user()->can('EliminarEspecialidades'))
-            abort(403, 'Permiso Denegado.');
+
+        if (!Auth::user()->hasPermissionTo('EliminarEspecialidades'))
+            abort(403);
 
         Especialidad::destroy($id);
         return redirect('/especialidades')->with('mensaje', 'Especialidad eliminada satisfactoriamente');

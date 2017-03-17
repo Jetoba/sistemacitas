@@ -26,9 +26,9 @@ class RolesController extends Controller
 
     public function index()
     {
+        if (!Auth::user()->hasPermissionTo('ModuloRoles'))
+            abort(403);
 
-        if (!Auth::user()->can('ModuloRoles'))
-            abort(403, 'Permiso Denegado.');
 
         $roles = Role::paginate(10);
         return view('roles.index', ['roles'=>$roles]);
@@ -41,8 +41,9 @@ class RolesController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('ModuloRoles'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('NuevoRole'))
+        abort(403);
+
 
         return view ('roles.create');
     }
@@ -98,9 +99,8 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-
-        if (!Auth::user()->can('EditarRole'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('EditarRole'))
+            abort(403);
 
 
         $role = Role::findOrFail($id);
@@ -149,10 +149,8 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        if (!Auth::user()->can('EliminarRole'))
-            abort(403, 'Permiso Denegado.');
-
-
+        if (!Auth::user()->hasPermissionTo('EliminarRole'))
+            abort(403);
 
         try{
             \DB::beginTransaction();
@@ -166,9 +164,8 @@ class RolesController extends Controller
     }
     public function permisos($id){
 
-        if (!Auth::user()->can('PermisoRole'))
-            abort(403, 'Permiso Denegado.');
-
+        if (!Auth::user()->hasPermissionTo('PermisoRole'))
+            abort(403);
 
         $role = Role::findOrFail($id);
         $permisos = Permission::all();
@@ -177,9 +174,8 @@ class RolesController extends Controller
 
     public function asignarPermisos( Request $request,$id){
 
-        if (!Auth::user()->can('PermisoRole'))
-            abort(403, 'Permiso Denegado.');
-
+        if (!Auth::user()->hasPermissionTo('PermisoRole'))
+            abort(403);
 
         $role = Role::findOrFail($id);
         $role->revokePermissionTo(Permission::all());

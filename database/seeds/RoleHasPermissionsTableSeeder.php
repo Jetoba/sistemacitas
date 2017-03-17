@@ -198,6 +198,10 @@ class RoleHasPermissionsTableSeeder extends Seeder
             'role_id' => 3,
             'permission_id' => 44,
         ]);
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 3,
+            'permission_id' => 14,
+        ]);
         // ---------------------------- FARMACEUTA PERMISOS
         // ---------------------------- USUARIOS EXTRA PERMISOS
 
@@ -208,6 +212,10 @@ class RoleHasPermissionsTableSeeder extends Seeder
         DB::table('role_has_permissions')->insert([
             'role_id' => 1,
             'permission_id' => 46,
+        ]);
+        DB::table('role_has_permissions')->insert([
+            'role_id' => 1,
+            'permission_id' => 44,
         ]);
 
 

@@ -77,7 +77,7 @@ class PermissionsTableSeeder extends Seeder
             'name'=> 'EliminarPermiso',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
-        ]);
+        ]);/////////
         DB::table('permissions')->insert([
             'name'=> 'ModuloMedicina',
             'created_at' => \Carbon\Carbon::now(),
@@ -234,7 +234,7 @@ class PermissionsTableSeeder extends Seeder
             'updated_at' => \Carbon\Carbon::now(),
         ]);
         DB::table('permissions')->insert([
-            'name'=> '',
+            'name'=> 'CrearPermiso',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ]);

@@ -26,9 +26,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-
-        if (!Auth::user()->can('ModuloUsuarios'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('ModuloUsuarios'))
+            abort(403);
 
         $users = null;
         $buscar = \Request::get('buscar');
@@ -52,9 +51,9 @@ class UsersController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->hasPermissionTo('AgregarUsuarios'))
+            abort(403);
 
-        if (!Auth::user()->can('AgregarUsuarios'))
-            abort(403, 'Permiso Denegado.');
 
         $roles = Role::all();
         $especialidades = Especialidad::all();
@@ -137,9 +136,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        if (!Auth::user()->hasPermissionTo('EditarUsuarios'))
+            abort(403);
 
-        if (!Auth::user()->can('EditarUsuarios'))
-            abort(403, 'Permiso Denegado.');
         $roles = Role::all();
         $user = User::findOrFail($id);
         return view('users.edit', ['user' => $user, 'roles' => $roles]);
@@ -206,9 +205,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        if (!Auth::user()->hasPermissionTo('EliminarUsuarios'))
+            abort(403);
 
-        if (!Auth::user()->can('EliminarUsuarios'))
-            abort(403, 'Permiso Denegado.');
 
         User::destroy($id);
         return redirect('/home')->with('mensaje', 'Usuario eliminado satisfactoriamente');
@@ -217,8 +216,8 @@ class UsersController extends Controller
 
     public function medicosindex()
     {
-        if (!Auth::user()->can('ModuloCitasdeMedico'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('ModuloCitasdeMedico'))
+            abort(403);
 
         $medicos = User::role('Medico')->latest()->paginate(10);
         return view('users.medicos', ['medicos' => $medicos]);
@@ -226,8 +225,9 @@ class UsersController extends Controller
 
     public function asignar($id)
     {
-         if (!Auth::user()->can('EspecialidadMedico'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('EspecialidadMedico'))
+            abort(403);
+
 
         $user = User::findOrFail($id);
         $especialidades = Especialidad::all();
@@ -236,8 +236,9 @@ class UsersController extends Controller
 
     public function asignarespecializacion(Request $request, $id)
     {
-        if (!Auth::user()->can('EspecialidadMedico'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('EspecialidadMedico'))
+            abort(403);
+
 
         $user = User::findOrFail($id);
         $user->especialidad()->sync($request->input('especialidades'));
@@ -246,8 +247,8 @@ class UsersController extends Controller
 
     public function mostrarcitas($id)
     {
-        if (!Auth::user()->can('VerCitasDeMedico'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('VerCitasDeMedico'))
+            abort(403);
 
         $medico = User::findorFail($id);
         $usuario = Cita::where('medico', $id)->get();
@@ -258,8 +259,9 @@ class UsersController extends Controller
 
     public function permisos($id)
     {
-        if (!Auth::user()->can('PermisosUsuarios'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('PermisosUsuarios'))
+        abort(403);
+
 
         $user = User::findOrFail($id);
         $permisos = Permission::all();
@@ -268,8 +270,9 @@ class UsersController extends Controller
 
     public function asignarPermisos(Request $request, $id)
     {
-        if (!Auth::user()->can('PermisosUsuarios'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('PermisosUsuarios'))
+            abort(403);
+
 
         $user = User::findOrFail($id);
         $user->revokePermissionTo(Permission::all());
@@ -280,8 +283,11 @@ class UsersController extends Controller
 
     public function pacientesindex()
     {
-        if (!Auth::user()->can('ModuloPacientes'))
-            abort(403, 'Permiso Denegado.');
+
+
+        if (!Auth::user()->hasPermissionTo('ModuloPacientes'))
+            abort(403);
+
 
         $pacientes = null;
         $buscar = \Request::get('buscar');

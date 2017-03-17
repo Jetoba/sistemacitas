@@ -26,8 +26,8 @@ class RecipesController extends Controller
     public function index()
 
     {
-        if (!Auth::user()->can('ModuloFarmaceuta'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('ModuloFarmaceuta'))
+            abort(403);
 
         $recipes = Recipe::despachados()->paginate(10);
         return view ('recipe.index',['recipes' => $recipes]);
@@ -41,9 +41,9 @@ class RecipesController extends Controller
      */
     public function create($id)
     {
+        if (!Auth::user()->hasPermissionTo('CrearRecipe'))
+            abort(403);
 
-        if (!Auth::user()->can('CrearRecipe'))
-            abort(403, 'Permiso Denegado.');
 
         $historia = Historia::findOrFail($id);
         return view('recipe.create', ['historia'=>$historia]);
@@ -92,8 +92,9 @@ class RecipesController extends Controller
      */
     public function edit($id)
     {
-        if (!Auth::user()->can('DespachoMedicina'))
-            abort(403, 'Permiso Denegado.');
+
+        if (!Auth::user()->hasPermissionTo('DespachoMedicina'))
+            abort(403);
 
         $recipe = Recipe::findOrFail($id);
         $medicinas= Medicina::all();
@@ -144,8 +145,8 @@ class RecipesController extends Controller
     public function reciphistory($id)
 
     {
-        if (!Auth::user()->can('RecipeLocal'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('RecipeLocal'))
+            abort(403);
 
 
         $historia = Historia::findorFail($id);
@@ -157,8 +158,9 @@ class RecipesController extends Controller
 
     public function asigne($id)
     {
-        if (!Auth::user()->can('AsignarMedicina'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('AsignarMedicina'))
+            abort(403);
+
 
         $recipe = Recipe::findOrFail($id);
         $medicinas = Medicina::all();
@@ -167,8 +169,8 @@ class RecipesController extends Controller
 
     public function asignarmedicina(Request $request, $id)
     {
-        if (!Auth::user()->can('AsignarMedicina'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('AsignarMedicina'))
+            abort(403);
 
         $recipe = Recipe::findOrFail($id);
         $recipe->medicina()->attach($request->input('medicinas'));
@@ -177,8 +179,8 @@ class RecipesController extends Controller
 
     public function recipedehistoria($id)
     {
-        if (!Auth::user()->can('RecipeGlobal'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('RecipeGlobal'))
+            abort(403);
 
 
         $recipes= Recipe::where('historia_id', $id)->paginate(10);

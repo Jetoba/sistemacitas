@@ -23,10 +23,9 @@ class CitasController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->hasPermissionTo('ModuloSecretaria'))
+            abort(403);
 
-
-        if (!Auth::user()->can('ModuloSecretaria'))
-            abort(403, 'Permiso Denegado.');
 
 
         $citas = Cita::pendiente()->paginate(10);
@@ -41,8 +40,9 @@ class CitasController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('CrearCitas'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('CrearCitas'))
+            abort(403);
+
         $especialidades = Especialidad::all();
         return view('cite.create',['especialidades'=>$especialidades]);
     }
@@ -108,8 +108,9 @@ class CitasController extends Controller
      */
     public function edit($id)
     {
-        if (!Auth::user()->can('EditarCita'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('EditarCita'))
+            abort(403);
+
 
         $cita = Cita::findOrFail($id);
         $paciente = User::findOrFail($cita->paciente_id);
@@ -152,8 +153,8 @@ class CitasController extends Controller
      */
     public function destroy($id)
     {
-        if (!Auth::user()->can('EliminarCita'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('EliminarCita'))
+            abort(403);
 
         Cita::destroy($id);
         return redirect('/cita')->with('mensaje', 'Cita eliminada satisfactoriamente');
@@ -161,8 +162,10 @@ class CitasController extends Controller
 
     public function medicosindex(){
 
-        if (!Auth::user()->can('ModuloCitasdeMedico'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('ModuloCitasdeMedico'))
+            abort(403);
+
+
 
         $medicos = User::role('Medico')->paginate(5);
         return view('users.medicos',['medicos'=>$medicos]);
@@ -171,9 +174,8 @@ class CitasController extends Controller
 
     public function mostrarcitas($id)
     {
-
-        if (!Auth::user()->can('VerCitasDeMedico'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('VerCitasDeMedico'))
+            abort(403);
 
         $medico = User::findorFail($id);
         $citas= Cita::where('medico_id', $id)->paginate(10);

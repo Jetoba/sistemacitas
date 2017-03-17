@@ -24,7 +24,7 @@
 
                                 @if(Auth::user()->roles[0]->hasPermissionTo('CrearMedicina') or Auth::user()->can('CrearMedicina'))
                                 <a href="{{ url('/medicinas/create') }}" class="btn btn-success">
-                                    <i class="fa fa-user"></i> Agregar Usuario
+                                    <i class="fa fa-user"></i> Agregar Medicina
                                 </a>
                                 @endif
                             </div>
@@ -32,7 +32,7 @@
                                 <form action="{{ url('/medicinas') }}" method="get">
                                     <div class="input-group">
                                         <input type="text" name="buscar" id="buscar" class="form-control"
-                                               placeholder="Inserte nombre, apellido o cedula..."
+                                               placeholder="Inserte nombre de medicina..."
                                                value="">
                                         <span class="input-group-btn">
                                         <button class="btn btn-default" type="submit"><i

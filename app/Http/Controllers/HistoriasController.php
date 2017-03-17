@@ -30,8 +30,8 @@ class HistoriasController extends Controller
      */
     public function create($id)
     {
-        if (!Auth::user()->can('CrearHistoria'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('CrearHistoria'))
+            abort(403);
 
         $cita = Cita::findOrFail($id);
         return view('historias.create', ['cita'=>$cita]);
@@ -123,8 +123,8 @@ class HistoriasController extends Controller
 
     public function mostrarhistoria($id)
     {
-        if (!Auth::user()->can('HistoriaLocal'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('HistoriaLocal'))
+            abort(403);
 
         $medico =  Auth::user()->id;
         $paciente = User::findorFail($id);
@@ -138,8 +138,10 @@ class HistoriasController extends Controller
 
     public function mostrarhistoriaglobal($id)
     {
-        if (!Auth::user()->can('HistorialGlobal'))
-            abort(403, 'Permiso Denegado.');
+
+        if (!Auth::user()->hasPermissionTo('HistorialGlobal'))
+            abort(403);
+
 
         $medico =  Auth::user()->id;
         $paciente = User::findorFail($id);

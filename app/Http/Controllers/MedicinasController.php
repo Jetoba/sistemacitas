@@ -22,8 +22,9 @@ class MedicinasController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('ModuloMedicina'))
-            abort(403, 'Permiso Denegado.');
+
+        if (!Auth::user()->hasPermissionTo('ModuloMedicina'))
+            abort(403);
 
         $users = null;
         $buscar = \Request::get('buscar');
@@ -42,8 +43,8 @@ class MedicinasController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('CrearMedicina'))
-            abort(403, 'Permiso Denegado.');
+        if (!Auth::user()->hasPermissionTo('CrearMedicina'))
+            abort(403);
 
         return view ('medicinas.create');
     }
@@ -99,8 +100,9 @@ class MedicinasController extends Controller
      */
     public function edit($id)
     {
-        if (!Auth::user()->can('EditarMedicina'))
-            abort(403, 'Permiso Denegado.');
+
+        if (!Auth::user()->hasPermissionTo('EditarMedicina'))
+            abort(403);
 
         $medicina = Medicina::findOrFail($id);
         return view('medicinas.edit', ['medicina'=>$medicina]);
@@ -146,8 +148,10 @@ class MedicinasController extends Controller
      */
     public function destroy($id)
     {
-        if (!Auth::user()->can('EliminarMedicina'))
-            abort(403, 'Permiso Denegado.');
+
+        if (!Auth::user()->hasPermissionTo('EliminarMedicina'))
+            abort(403);
+
 
         Medicina::destroy($id);
         return redirect('/medicinas')->with('mensaje', 'Medicina eliminada satisfactoriamente');
