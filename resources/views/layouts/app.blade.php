@@ -11,7 +11,9 @@
     <title>Vitalyc</title>
 
     <!-- Styles -->
+
     <link href="{{asset('/css/app.css')}}" rel="stylesheet">
+
 
 
     <link href="{{asset('/css/font-awesome.css')}}" rel="stylesheet">
@@ -21,12 +23,13 @@
 
     <link rel="stylesheet" href="fonts/font-awesome.min.css" type="text/css" media="screen">
     <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
-    <link href="{{asset('css/material.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/material.css')}}" rel="stylesheet">
     <link href="{{asset('css/ripples.min.css')}}"rel="stylesheet">
     <link href="{{asset('css/main.css')}}" rel="stylesheet">
     <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
     <link href="{{asset('css/animate.min.css')}}" rel="stylesheet">
     <Link href = "https://file.myfontastic.com/yDauQVtFyBxnLvwmgreRsM/icons.css" rel = "stylesheet">
+    <link href="{{asset('/css/stylemy.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -36,13 +39,13 @@
     </script>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+    <div id="app lyat">
+        <nav class="navbar navbar-default navbar-static-top lyat">
+            <div class="container lyat">
+                <div class="navbar-header lyat">
 
                     <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                    <button type="button" class="navbar-toggle collapsed lyat" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -50,19 +53,19 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                       Vitalyc
+                    <a class="logo-left lyat " href="{{ url('/') }}"><i class="icon-logo-de-la-pagina-01"></i>Vitalyc</a>
+
                     </a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <div class="collapse navbar-collapse lyat" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav lyat">
                         &nbsp;
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right lyat">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
@@ -96,7 +99,7 @@
                                     {{ Auth::user()->nombre." ".Auth::user()->apellido }} <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
+                                <ul class="dropdown-menu lyat" role="menu">
                                     <li>
 
                                         <a href="{{ url('/logout') }}"

@@ -5678,7 +5678,7 @@ fieldset[disabled] .navbar .btn-link:focus {
 }
 .navbar.navbar,
 .navbar-default.navbar {
-  background-color: #009688;
+ 
   color: rgba(255, 255, 255, 0.84);
 }
 .navbar.navbar .navbar-form .form-control-wrapper input.form-control::-webkit-input-placeholder,

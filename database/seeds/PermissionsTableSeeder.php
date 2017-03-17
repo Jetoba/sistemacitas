@@ -234,7 +234,7 @@ class PermissionsTableSeeder extends Seeder
             'updated_at' => \Carbon\Carbon::now(),
         ]);
         DB::table('permissions')->insert([
-            'name'=> 'CrearPermiso',
+            'name'=> '',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ]);

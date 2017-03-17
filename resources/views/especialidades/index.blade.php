@@ -19,7 +19,7 @@
 
                     <div class="panel-body">
                         Listado de Especialidades
-                        @if(Auth::user()->roles[0]->hasPermissionTo('ModuloEspecialidades') or Auth::user()->can('ModuloEspecialidades'))
+                        @if(Auth::user()->roles[0]->hasPermissionTo('CrearEspecialidad') or Auth::user()->can('CrearEspecialidad'))
                         <a href="{{ url('/especialidades/create') }}" class="btn btn-success">
                             <i class="fa fa-user"></i> Agregar Especialidad
                         </a>

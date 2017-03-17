@@ -27,7 +27,7 @@
                             </div>
 
                             <div class="form-group">
-                                @if(Auth::user()->roles[0]->hasPermissionTo('ModuloEspecialidades') or Auth::user()->can('ModuloEspecialidades'))
+                                @if(Auth::user()->roles[0]->hasPermissionTo('CrearEspecialidad') or Auth::user()->can('CrearEspecialidad'))
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
                                         Guardar

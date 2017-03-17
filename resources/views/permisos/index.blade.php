@@ -20,7 +20,7 @@
                     <div class="panel-body">
 
                         Listado de Permisos
-                        @if(Auth::user()->roles[0]->hasPermissionTo('ModuloPermisos') or Auth::user()->can('ModuloPermisos'))
+                        @if(Auth::user()->roles[0]->hasPermissionTo('CrearEspecialidad') or Auth::user()->can('CrearEspecialidad'))
                         <a href="{{ url('/permisos/create') }}" class="btn btn-success">
                             <i class="fa fa-user"></i> Permiso Nuevo
                         </a>

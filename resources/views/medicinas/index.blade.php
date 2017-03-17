@@ -22,7 +22,7 @@
                             <div class="col-md-6">
                                 Listado de Medicinas
 
-                                @if(Auth::user()->roles[0]->hasPermissionTo('ModuloMedicina') or Auth::user()->can('ModuloMedicina'))
+                                @if(Auth::user()->roles[0]->hasPermissionTo('CrearMedicina') or Auth::user()->can('CrearMedicina'))
                                 <a href="{{ url('/medicinas/create') }}" class="btn btn-success">
                                     <i class="fa fa-user"></i> Agregar Usuario
                                 </a>

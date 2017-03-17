@@ -37,7 +37,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('ModuloPermisos'))
+        if (!Auth::user()->can('CrearPermiso'))
             abort(403, 'Permiso Denegado.');
 
         return view ('permisos.create');

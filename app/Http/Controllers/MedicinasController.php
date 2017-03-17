@@ -42,7 +42,7 @@ class MedicinasController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('ModuloMedicina'))
+        if (!Auth::user()->can('CrearMedicina'))
             abort(403, 'Permiso Denegado.');
 
         return view ('medicinas.create');

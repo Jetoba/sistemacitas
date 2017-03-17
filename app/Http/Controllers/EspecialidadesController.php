@@ -36,7 +36,7 @@ class EspecialidadesController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('ModuloEspecialidades'))
+        if (!Auth::user()->can('CrearEspecialidad'))
             abort(403, 'Permiso Denegado.');
         return view ('especialidades.create');
     }

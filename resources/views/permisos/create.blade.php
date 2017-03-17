@@ -28,11 +28,13 @@
 
 
                             <div class="form-group">
+                                @if(Auth::user()->roles[0]->hasPermissionTo('CrearPermiso') or Auth::user()->can('CrearPermiso'))
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
                                         Guardar
                                     </button>
                                 </div>
+                                    @endif
                             </div>
                         </form>
                     </div>

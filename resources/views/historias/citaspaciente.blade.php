@@ -18,7 +18,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <span>
-                            Historial medico del paciente
+                            Historial medico de la cita del paciente
                         </span>
                         <strong>{{$paciente->nombre." ".$paciente->apellido}}</strong></div>
                     <div class="panel-body">
@@ -28,17 +28,21 @@
                                 <th>Especialidad</th>
                                 <th>Medico</th>
                                 <th>Informe</th>
-                                <th colspan="3" width="10%">Acciones</th>
+
                             </tr>
                             @foreach($historia as $historia)
                                 <tr>
                                     <td>{{ $historia->especialidad->nombre }}</td>
                                     <td>{{ $historia->medico->nombre . " " . $historia->medico->apellido   }}
                                     <td>{{ $historia->informe}}</td>
+                                </tr>
+                                <tr>
+                                   <th colspan="3">Acciones</th>
+                                <tr>
                                     @if(Auth::user()->roles[0]->hasPermissionTo('CrearRecipe') or Auth::user()->can('CrearRecipe'))
                                     <td>
                                         <a href="{{ url('/recipe/'.$historia->id.'/create')}}"
-                                           class="btn btn-warning">
+                                           class="btn btn-success">
                                             Crear Recipe
                                         </a>
                                     </td>
@@ -46,7 +50,7 @@
                                     @if(Auth::user()->roles[0]->hasPermissionTo('RecipeLocal') or Auth::user()->can('RecipeLocal'))
                                     <td>
                                         <a href="{{ url('/recipe/'.$historia->id.'/recipeshistoria')}}"
-                                           class="btn btn-warning">
+                                           class="btn btn-success">
                                             Recipe
                                         </a>
                                     </td>

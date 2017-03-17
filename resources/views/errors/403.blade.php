@@ -40,7 +40,8 @@
 <body>
 <div class="container">
     <div class="content">
-        <div class="title">Be right back.</div>
+        <div class="title">Error 403 </div>
+        <div class="title">Acceso No Disponible </div>
     </div>
 </div>
 </body>
