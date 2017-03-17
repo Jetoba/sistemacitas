@@ -18,21 +18,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Medicinas despachadas</div>
                     <div class="panel-body">
-                        {{--<div class="row">--}}
-                        {{--<div class="col-lg-6">--}}
-                            {{--<form action="{{ url('/recipes') }}" method="get">--}}
-                                {{--<div class="input-group">--}}
-                                    {{--<input type="text" name="buscar" id="buscar" class="form-control"--}}
-                                           {{--placeholder="Inserte nombre, apellido, fecha o farmaceuta ..."--}}
-                                           {{--value="">--}}
-                                    {{--<span class="input-group-btn">--}}
-                                        {{--<button class="btn btn-default" type="submit">--}}
-                                            {{--<i class="fa fa-search"></i></button>--}}
-                                    {{--</span>--}}
-                                {{--</div>--}}
-                            {{--</form>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
                         <div class="row">
                             <div class="panel-body">
                                 <table class="table table-bordered" style="margin-top: 1%;">

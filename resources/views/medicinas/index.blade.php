@@ -108,10 +108,12 @@
                                 class="btn btn-default"
                                 data-dismiss="modal">Cancelar
                         </button>
+                        @if(Auth::user()->roles[0]->hasPermissionTo('EliminarMedicina') or Auth::user()->can('EliminarMedicina'))
                         <button id="delete-btn"
                                 class="btn btn-danger"
                                 title="Eliminar">Eliminar
                         </button>
+                            @endif
                     </form>
                 </div>
             </div>

@@ -79,11 +79,11 @@
                                 <label for="status" class="col-md-4 control-label">Estado</label>
 
                                 <div class="col-md-6">
-                                   <select name="status" id="status" class="form-control" >
-                                        <option value="pendiente">pendiente</option>
-                                        <option value="Asignada">Asignada</option>
-                                       <option value="Viendose">Viendose</option>
-                                        <option value="vista">Vista</option>
+                                   <select name="status" id="status" class="form-control">
+                                        <option value="pendiente" @if($cita->status=='pendiente') selected @endif>Pendiente</option>
+                                        <option value="Asignada" @if($cita->status=='Asignada') selected @endif>Asignada</option>
+                                       <option value="Viendose" @if($cita->status=='Viendose') selected @endif>Viendose</option>
+                                        <option value="Vista" @if($cita->status=='Vista') selected @endif>Vista</option>
                                     </select>
                                     @if ($errors->has('status'))
                                         <span class="help-block">

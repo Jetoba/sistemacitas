@@ -39,7 +39,7 @@
                                         </a>
                                     </td>
                                     @endif
-                                    @if(Auth::user()->roles[0]->hasPermissionTo('specialidadMedico') or Auth::user()->can('specialidadMedico'))
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('EspecialidadMedico') or Auth::user()->can('EspecialidadMedico'))
                                     <td>
                                         <a href="{{ url('medico/'.$medico->id.'/asignar') }}" class="btn btn-warning">
                                             Especialidad

@@ -11,8 +11,22 @@
     <title>Vitalyc</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/font-awesome.css" rel="stylesheet">
+    <link href="{{asset('/css/app.css')}}" rel="stylesheet">
+
+
+    <link href="{{asset('/css/font-awesome.css')}}" rel="stylesheet">
+
+    <link href= "{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+
+    <link rel="stylesheet" href="fonts/font-awesome.min.css" type="text/css" media="screen">
+    <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
+    <link href="{{asset('css/material.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/ripples.min.css')}}"rel="stylesheet">
+    <link href="{{asset('css/main.css')}}" rel="stylesheet">
+    <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('css/animate.min.css')}}" rel="stylesheet">
+    <Link href = "https://file.myfontastic.com/yDauQVtFyBxnLvwmgreRsM/icons.css" rel = "stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -70,7 +84,7 @@
                             <li><a href="{{ url('/especialidades') }}">Especialidades</a></li>
                                 @endif
                                 @if(Auth::user()->roles[0]->hasPermissionTo('ModuloPacientes') or Auth::user()->can('ModuloPacientes'))
-                            <li><a href="{{ url('/Pacientes') }}">Pacientes</a></li>
+                            <li><a href="{{ url('/Pacientes') }}">Historial Medico de Pacientes</a></li>
                                 @endif
                                 @if(Auth::user()->roles[0]->hasPermissionTo('ModuloSecretaria') or Auth::user()->can('ModuloSecretaria'))
                             <li><a href="{{ url('/cita') }}">Citas</a></li>
@@ -117,3 +131,6 @@
     </script>
 </body>
 </html>
+
+
+

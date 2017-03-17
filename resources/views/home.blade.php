@@ -13,6 +13,7 @@
                 </div>
             </div>
         @endif
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -21,8 +22,10 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="panel-body">
+                                    @if(Auth::user()->roles[0]->hasPermissionTo('CrearCitas') or Auth::user()->can('CrearCitas'))
                                     <a href="{{url('cita/create')}}" class="btn btn-success">
                                         <i class="fa fa-user"></i> Nueva Cita</a>
+                                    @endif
                                     <table class="table table-bordered" style="margin-top: 1%;">
                                         <tr>
                                             <th>Fecha</th>

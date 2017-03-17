@@ -11,9 +11,6 @@
                         <div class="row">
                             <div class="panel-body">
 
-                                @if(Auth::user()->roles[0]->hasPermissionTo('CitasSecretaria') or Auth::user()->can('CitasSecretaria'))
-
-                                @endif
 
                                 <a href="{{url('cita/create')}}" class="btn btn-success">
                                     <i class="fa fa-user"></i> Nueva Cita</a>

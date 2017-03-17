@@ -185,7 +185,7 @@ class UsersController extends Controller
             \DB::commit();
         }
 
-        return $user;
+        return redirect('/usuarios')->with('mensaje', 'Usuario creado satisfactoriamente');
     }
 
     /**

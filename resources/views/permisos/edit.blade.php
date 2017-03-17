@@ -33,11 +33,13 @@
                             </div>
 
                             <div class="form-group">
+                                @if(Auth::user()->roles[0]->hasPermissionTo('EditarPermiso') or Auth::user()->can('EditarPermiso'))
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
                                         Guardar
                                     </button>
                                 </div>
+                                    @endif
                             </div>
                         </form>
                     </div>

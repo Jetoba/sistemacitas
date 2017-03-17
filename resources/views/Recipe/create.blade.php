@@ -11,9 +11,6 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/recipes') }}">
                             {{ method_field('POST') }}
                             {{ csrf_field() }}
-
-
-                            Vista de boton create
                             <div class="form-group{{ $errors->has('cita_id') ? ' has-error' : '' }}">
                                 <label for="historia_id" class="col-md-4 control-label">Historia No</label>
 
@@ -43,11 +40,13 @@
                             </div>
 
                             <div class="form-group">
+                                @if(Auth::user()->roles[0]->hasPermissionTo('CrearRecipe') or Auth::user()->can('CrearRecipe'))
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
                                         Guardar
                                     </button>
                                 </div>
+                                    @endif
                             </div>
                         </form>
                     </div>

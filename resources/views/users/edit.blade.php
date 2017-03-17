@@ -84,23 +84,24 @@
                                 </div>
                             </div>
 
+
                             <div class="form-group{{ $errors->has('sexo') ? ' has-error' : '' }}">
                                 <label for="sexo" class="col-md-4 control-label">Sexo</label>
 
                                 <div class="col-md-6">
-                                    <label><input type="radio" id="sexo" name="sexo" value="Masculino" @if(old('sexo')=='Masculino') checked @endif/>Masculino</label>
-                                    <br>
-                                    <label><input type="radio" id="sexo" name="sexo" value="Femenino" @if(old('sexo')=='Femenino') checked @endif/>Femenino</label>
-
+                                    <select name="sexo" id="sexo" class="form-control">
+                                        <option value="Femenino" @if($user->sexo=='Femenino') selected @endif>Pemenino</option>
+                                        <option value="Masculino" @if($user->sexo=='Masculino') selected @endif>Masculino</option>
+                                    </select>
                                     @if ($errors->has('sexo'))
                                         <span class="help-block">
-                                        <strong>
-                                            <strong>{{ $errors->first('sexo') }}</strong>
-                                        </strong>
+                                        <strong>{{ $errors->first('sexo') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
+
+
 
                             <div class="form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
                                 <label for="telefono" class="col-md-4 control-label">Telefono</label>

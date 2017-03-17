@@ -36,7 +36,6 @@
                         <div class="navbar-header">
                             <a class="logo-left " href="index.html"><i class="icon-logo-de-la-pagina-01"></i>Vitalyc</a>
                         </div>
-
                     </div>
                 </div>
             </div>
