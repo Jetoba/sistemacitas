@@ -312,7 +312,7 @@
                 <div class="col-md-3 col-sm-6 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
                     <div class="features-content">
                         <div class="icon hi-icon-effect-3b">
-                            <i class="mdi-action-settings"></i>
+                            <i class="mdi-action-face-unlock"></i>
                         </div>
                         <h3>Pediatria</h3>
 
@@ -321,7 +321,7 @@
                 <div class="col-md-3 col-sm-6 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="600ms">
                     <div class="features-content">
                         <div class="icon">
-                            <i class="mdi-action-lock-outline"></i>
+                            <i class="mdi-action-favorite"></i>
                         </div>
                         <h3>Cardiologia</h3>
 
@@ -357,7 +357,7 @@
                 <div class="col-md-3 col-sm-6 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="1400ms">
                     <div class="features-content">
                         <div class="icon">
-                            <i class="mdi-content-flag"></i>
+                            <i class="mdi-action-visibility"></i>
                         </div>
                         <h3>Oftalmologia</h3>
 
@@ -385,7 +385,10 @@
         </div>
     </section>
 
-
+    <div class="map-area">
+        <div class="map">
+            <iframe src="http://www.mapsdirections.info/crear-un-mapa-de-google/map.php?width=100%&height=600&hl=en&q=Caracas%2C%20Venezuela%2C%20Caracas%2C%20el%20nacional+(Vitalyc)&ie=UTF8&t=&z=14&iwloc=A&output=embed" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
 
 
     <section id="copyright">

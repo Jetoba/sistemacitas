@@ -7,22 +7,14 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>Vitalyc</title>
 
     <!-- Styles -->
 
     <link href="{{asset('/css/app.css')}}" rel="stylesheet">
-
-
-
     <link href="{{asset('/css/font-awesome.css')}}" rel="stylesheet">
-
     <link href= "{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
-    <!-- Font Awesome CSS -->
-
-    <link rel="stylesheet" href="fonts/font-awesome.min.css" type="text/css" media="screen">
-    <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
+    <link  href="{{asset('fonts/font-awesome.min.css')}}" type="text/css" media="screen" rel="stylesheet">
     <link href="{{asset('css/material.css')}}" rel="stylesheet">
     <link href="{{asset('css/ripples.min.css')}}"rel="stylesheet">
     <link href="{{asset('css/main.css')}}" rel="stylesheet">
