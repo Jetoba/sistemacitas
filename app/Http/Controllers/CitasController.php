@@ -11,6 +11,11 @@ use App\User;
 
 class CitasController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +23,12 @@ class CitasController extends Controller
      */
     public function index()
     {
+
+
+        if (!Auth::user()->can('ModuloSecretaria'))
+            abort(403, 'Permiso Denegado.');
+
+
         $citas = Cita::pendiente()->paginate(10);
         return view ('cite.index',['citas' => $citas]);
 
@@ -30,7 +41,8 @@ class CitasController extends Controller
      */
     public function create()
     {
-
+        if (!Auth::user()->can('CrearCitas'))
+            abort(403, 'Permiso Denegado.');
         $especialidades = Especialidad::all();
         return view('cite.create',['especialidades'=>$especialidades]);
     }
@@ -96,6 +108,9 @@ class CitasController extends Controller
      */
     public function edit($id)
     {
+        if (!Auth::user()->can('EditarCita'))
+            abort(403, 'Permiso Denegado.');
+
         $cita = Cita::findOrFail($id);
         $paciente = User::findOrFail($cita->paciente_id);
         $especialidades = Especialidad::all();
@@ -137,11 +152,18 @@ class CitasController extends Controller
      */
     public function destroy($id)
     {
+        if (!Auth::user()->can('EliminarCita'))
+            abort(403, 'Permiso Denegado.');
+
         Cita::destroy($id);
         return redirect('/cita')->with('mensaje', 'Cita eliminada satisfactoriamente');
     }
 
     public function medicosindex(){
+
+        if (!Auth::user()->can('ModuloCitasdeMedico'))
+            abort(403, 'Permiso Denegado.');
+
         $medicos = User::role('Medico')->paginate(5);
         return view('users.medicos',['medicos'=>$medicos]);
 
@@ -149,6 +171,10 @@ class CitasController extends Controller
 
     public function mostrarcitas($id)
     {
+
+        if (!Auth::user()->can('VerCitasDeMedico'))
+            abort(403, 'Permiso Denegado.');
+
         $medico = User::findorFail($id);
         $citas= Cita::where('medico_id', $id)->paginate(10);
 
@@ -156,13 +182,5 @@ class CitasController extends Controller
         return view('cite.medicocitas',['citas'=>$citas, 'medico'=>$medico]);
 
     }
-    public function miscitas(){
 
-        $id = Auth::user()->id;
-        $citas= Cita::where('medico', $id)->where('status','=','Asignada');
-
-
-        return view('doctores.home',['citas'=>$citas]);
-
-    }
 }

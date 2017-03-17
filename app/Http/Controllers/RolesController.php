@@ -27,6 +27,9 @@ class RolesController extends Controller
     public function index()
     {
 
+        if (!Auth::user()->can('ModuloRoles'))
+            abort(403, 'Permiso Denegado.');
+
         $roles = Role::paginate(10);
         return view('roles.index', ['roles'=>$roles]);
     }
@@ -38,7 +41,8 @@ class RolesController extends Controller
      */
     public function create()
     {
-
+        if (!Auth::user()->can('ModuloRoles'))
+            abort(403, 'Permiso Denegado.');
 
         return view ('roles.create');
     }
@@ -95,8 +99,9 @@ class RolesController extends Controller
     public function edit($id)
     {
 
-      //  if(!Auth::user()->can('EditarRole'))
-      //      abort(403, 'Acceso Denegado Muchachos');
+        if (!Auth::user()->can('EditarRole'))
+            abort(403, 'Permiso Denegado.');
+
 
         $role = Role::findOrFail($id);
         return view('roles.edit', ['role'=>$role]);
@@ -144,6 +149,11 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
+        if (!Auth::user()->can('EliminarRole'))
+            abort(403, 'Permiso Denegado.');
+
+
+
         try{
             \DB::beginTransaction();
             Role::destroy($id);
@@ -155,8 +165,10 @@ class RolesController extends Controller
         return redirect('/roles')->with('mensaje', 'Role eliminado satisfactoriamente');
     }
     public function permisos($id){
-       // if(!Auth::user()->can('PermisosRole'))
-         //   abort(403, 'Acceso Denegado Muchachos');
+
+        if (!Auth::user()->can('PermisoRole'))
+            abort(403, 'Permiso Denegado.');
+
 
         $role = Role::findOrFail($id);
         $permisos = Permission::all();
@@ -164,6 +176,10 @@ class RolesController extends Controller
     }
 
     public function asignarPermisos( Request $request,$id){
+
+        if (!Auth::user()->can('PermisoRole'))
+            abort(403, 'Permiso Denegado.');
+
 
         $role = Role::findOrFail($id);
         $role->revokePermissionTo(Permission::all());

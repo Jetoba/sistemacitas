@@ -18,7 +18,7 @@
                     <div class="panel-heading" >Listado de Citas</div>
                     <div class="panel-body">
                         <a href="{{url('/medicos')}}" class="btn btn-success">
-                            @if(Auth::user()->roles[0]->hasPermissionTo('ModuloCitasdeMedico') or Auth::user()->can('EditarCita'))
+                            @if(Auth::user()->roles[0]->hasPermissionTo('ModuloCitasdeMedico') or Auth::user()->can('ModuloCitasdeMedico'))
                             <i class="fa fa-user"></i> Medicos</a>
                         @endif
                         <table class="table table-bordered" style=" margin-top: 1%;">

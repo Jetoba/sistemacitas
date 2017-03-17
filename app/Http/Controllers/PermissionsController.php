@@ -22,6 +22,10 @@ class PermissionsController extends Controller
      */
     public function index()
     {
+
+        if (!Auth::user()->can('ModuloPermisos'))
+            abort(403, 'Permiso Denegado.');
+
         $permisos = Permission::paginate(10);
         return view('permisos.index', ['permisos'=>$permisos]);
     }
@@ -33,6 +37,8 @@ class PermissionsController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('ModuloPermisos'))
+            abort(403, 'Permiso Denegado.');
 
         return view ('permisos.create');
     }
@@ -87,6 +93,8 @@ class PermissionsController extends Controller
     public function edit($id)
     {
 
+        if (!Auth::user()->can('EditarPermiso'))
+            abort(403, 'Permiso Denegado.');
 
         $permiso = Permission::findOrFail($id);
         return view('permisos.edit', ['permiso'=>$permiso]);
@@ -133,6 +141,10 @@ class PermissionsController extends Controller
      */
     public function destroy($id)
     {
+
+        if (!Auth::user()->can('EliminarPermiso'))
+            abort(403, 'Permiso Denegado.');
+
         try{
             \DB::beginTransaction();
             Permission::destroy($id);

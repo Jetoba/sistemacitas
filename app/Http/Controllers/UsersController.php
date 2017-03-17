@@ -27,6 +27,9 @@ class UsersController extends Controller
     public function index()
     {
 
+        if (!Auth::user()->can('ModuloUsuarios'))
+            abort(403, 'Permiso Denegado.');
+
         $users = null;
         $buscar = \Request::get('buscar');
         if($buscar!='')
@@ -49,6 +52,10 @@ class UsersController extends Controller
      */
     public function create()
     {
+
+        if (!Auth::user()->can('AgregarUsuarios'))
+            abort(403, 'Permiso Denegado.');
+
         $roles = Role::all();
         $especialidades = Especialidad::all();
         return view('users.create', ['roles' => $roles, 'especialidades' => $especialidades]);
@@ -130,6 +137,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+
+        if (!Auth::user()->can('EditarUsuarios'))
+            abort(403, 'Permiso Denegado.');
         $roles = Role::all();
         $user = User::findOrFail($id);
         return view('users.edit', ['user' => $user, 'roles' => $roles]);
@@ -196,6 +206,10 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+
+        if (!Auth::user()->can('EliminarUsuarios'))
+            abort(403, 'Permiso Denegado.');
+
         User::destroy($id);
         return redirect('/home')->with('mensaje', 'Usuario eliminado satisfactoriamente');
     }
@@ -203,6 +217,8 @@ class UsersController extends Controller
 
     public function medicosindex()
     {
+        if (!Auth::user()->can('ModuloCitasdeMedico'))
+            abort(403, 'Permiso Denegado.');
 
         $medicos = User::role('Medico')->latest()->paginate(10);
         return view('users.medicos', ['medicos' => $medicos]);
@@ -210,6 +226,9 @@ class UsersController extends Controller
 
     public function asignar($id)
     {
+         if (!Auth::user()->can('EspecialidadMedico'))
+            abort(403, 'Permiso Denegado.');
+
         $user = User::findOrFail($id);
         $especialidades = Especialidad::all();
         return view('users.especialidadmedico', ['user' => $user, 'especialidades' => $especialidades]);
@@ -217,7 +236,8 @@ class UsersController extends Controller
 
     public function asignarespecializacion(Request $request, $id)
     {
-
+        if (!Auth::user()->can('EspecialidadMedico'))
+            abort(403, 'Permiso Denegado.');
 
         $user = User::findOrFail($id);
         $user->especialidad()->sync($request->input('especialidades'));
@@ -226,6 +246,9 @@ class UsersController extends Controller
 
     public function mostrarcitas($id)
     {
+        if (!Auth::user()->can('VerCitasDeMedico'))
+            abort(403, 'Permiso Denegado.');
+
         $medico = User::findorFail($id);
         $usuario = Cita::where('medico', $id)->get();
 
@@ -235,6 +258,9 @@ class UsersController extends Controller
 
     public function permisos($id)
     {
+        if (!Auth::user()->can('PermisosUsuarios'))
+            abort(403, 'Permiso Denegado.');
+
         $user = User::findOrFail($id);
         $permisos = Permission::all();
         return view('users.permisos', ['user' => $user, 'permisos' => $permisos]);
@@ -242,6 +268,9 @@ class UsersController extends Controller
 
     public function asignarPermisos(Request $request, $id)
     {
+        if (!Auth::user()->can('PermisosUsuarios'))
+            abort(403, 'Permiso Denegado.');
+
         $user = User::findOrFail($id);
         $user->revokePermissionTo(Permission::all());
         if ($request->input('permisos'))
@@ -251,6 +280,8 @@ class UsersController extends Controller
 
     public function pacientesindex()
     {
+        if (!Auth::user()->can('ModuloPacientes'))
+            abort(403, 'Permiso Denegado.');
 
         $pacientes = null;
         $buscar = \Request::get('buscar');
@@ -261,6 +292,7 @@ class UsersController extends Controller
                 ->cedula($buscar)
                 ->paginate();
         else
+
             $pacientes = User::role('Paciente')->latest()->paginate(10);
         return view('users.Pacientes', ['pacientes' => $pacientes, 'buscar' => $buscar]);
     }
